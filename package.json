@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "ejs": "^3.1.8",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "prettier": "^2.8.4"
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
