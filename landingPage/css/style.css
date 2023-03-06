@@ -44,3 +44,21 @@ body {
     text-align: center;
   }
   
+  .games {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  /*overflow-x: auto; */
+  gap: 20px;
+  margin: 20px 0;
+  padding: 10px;
+  -webkit-overflow-scrolling: touch; /* for smoother scrolling on iOS */
+  }
+  
+  .games img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
