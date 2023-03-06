@@ -40,10 +40,10 @@ Dit is ons project voor AP Graduaat Programmeren. Het is een webapplicatie die g
 
 ### Development
 
-- [typescript](https://www.npmjs.com/package/typescript) ~ Voor het gebruik van typescript type safety
-- [ts-node](https://www.npmjs.com/package/ts-node) ~ Voor het gebruik van typescript in de applicatie
-- [ts-node-dev](https://www.npmjs.com/package/ts-node-dev) ~ Voor het automatisch herstarten van de applicatie bij het opslaan van een bestand
-- [prettier](https://www.npmjs.com/package/prettier) ~ Voor het stylen van de code, zodat deze consistent is
+- [TypeScript](https://www.npmjs.com/package/typescript) ~ Voor het gebruik van typescript type safety
+- [TS-node](https://www.npmjs.com/package/ts-node) ~ Voor het gebruik van typescript in de applicatie
+- [TS-node-dev](https://www.npmjs.com/package/ts-node-dev) ~ Voor het automatisch herstarten van de applicatie bij het opslaan van een bestand
+- [Prettier](https://www.npmjs.com/package/prettier) ~ Voor het stylen van de code, zodat deze consistent is
 
 ## Auteurs
 
