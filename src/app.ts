@@ -8,7 +8,7 @@ app.set("view engine", "ejs");
 app.set("views", "src/pages");
 
 app.get("/", (req, res) => {
-  res.render("pages/index", {});
+  res.render("index");
 });
 
 // Starting the server
