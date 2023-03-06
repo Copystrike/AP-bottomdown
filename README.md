@@ -54,4 +54,4 @@ Dit is ons project voor AP Graduaat Programmeren. Het is een webapplicatie die g
 
 ## Licentie
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://choosealicense.com/licenses/mit/) 

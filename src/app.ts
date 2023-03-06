@@ -8,7 +8,7 @@ app.set("view engine", "ejs"); // To set the view engine
 app.set("views", "src/pages"); // To set the views directory
 
 app.get("/", (req, res) => {
-  res.render("index", { title: "Fortnite" });
+  res.render("index");
 });
 
 // Starting the server
