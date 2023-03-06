@@ -5,11 +5,10 @@ const app: Application = express();
 app.use(express.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.set("views", "src/pages");
 
 app.get("/", (req, res) => {
-  res.render("pages/index", {
-
-  });
+  res.render("pages/index", {});
 });
 
 // Starting the server
