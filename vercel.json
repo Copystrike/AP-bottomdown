@@ -12,6 +12,7 @@
       "src": "/(.*)",
       "dest": "dist/app.js",
       "config": { "includeFiles": ["**"] }
+      
     }
   ]
 }
