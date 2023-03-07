@@ -17,8 +17,10 @@
     "prettier": "^2.8.4"
   },
   "scripts": {
-    "lint": "eslint . --ext .ts",
-    "start": "ts-node-dev src/app.ts"
+    "start": "node dist/app.js",
+    "dev": "ts-node-dev src/app.ts",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
