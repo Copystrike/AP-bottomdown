@@ -19,7 +19,7 @@
   "scripts": {
     "start": "node dist/app.js",
     "dev": "ts-node-dev src/app.ts",
-    "build": "tsc",
+    "build": "npm install & tsc",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],
