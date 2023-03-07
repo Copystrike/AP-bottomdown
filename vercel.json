@@ -2,10 +2,10 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/app.js",
+      "src": "src/app.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["src/**"]
+        "includeFiles": ["src/**/*", "package.json", "package-lock.json"]
       }
     }
   ],
