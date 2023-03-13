@@ -5,12 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fortnite</title>
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 50px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover {
+        background-color: #111;
+      }
+      #avatar-container > img {
+        width: 150px;
+        float: right;
+      }
+      </style>
 </head>
 <body>
-  <h1>Fortnite Items</h1>
+  <ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#contact">Favorieten</a></li>
+    <li><a href="#about">Blacklisted</a></li>
+    <li><div id="avatar-container"></div></li>
+  </ul>
   <div>
     <% for (let i = 1; i < 5; i++) { %>
-      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>">
+      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px">
       <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
     <% } %>
   </div>
@@ -23,6 +57,8 @@
       avatarContainer.appendChild(avatar);
     }
   </script>
-  <div id="avatar-container"></div>
+
+  <!--<div id="avatar-container"></div>-->
+  
 </body>
 </html>
