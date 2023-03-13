@@ -11,7 +11,7 @@
   <div>
     <% for (let i = 1; i < 5; i++) { %>
       <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>">
-      <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set as Avatar</button>
+      <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
     <% } %>
   </div>
   <script>
