@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>PlayStation 4 UI</title>
-    <link rel="stylesheet" href="../public/css/style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
     <header>
-      <img src="/assets/logo.png" alt="PlayStation 4 Logo" />
+
+      <section>
+        <h1>Welcome to PlayStation 4</h1>
+        <p>Select an option from the navigation menu above</p>
+      </section>
       <nav>
         
         <ul>
@@ -18,20 +22,53 @@
       </nav>
     </header>
     <main>
-      <section>
-        <h1>Welcome to PlayStation 4</h1>
-        <p>Select an option from the navigation menu above</p>
-      </section>
+      
 
-      <section>
-        <figure>
-          <img src="/assets/logo.png">
+      <section class="games">
+
+        <figure id="mtg">
+          <a href="./test"><img src="/assets/mtg.jpg" ref></a>
+          <figcaption>Magic The Gathering</figcaption>
         </figure>
+
+        <figure id="pokemon">
+          <a href="./test">"<img src="/assets/pokemon.jpg"></a>
+          <figcaption>Pokemon</figcaption>
+        </figure>
+
+        <figure id="nbb">
+          <img src="/assets/nbb.jpg">
+          <figcaption>NBB</figcaption>
+        </figure>
+
+        <figure id="lotr">
+          <img src="/assets/lotr.jpg">
+          <figcaption>LOTR</figcaption>
+        </figure>
+
+        <figure id="fortnite">
+          <img src="/assets/fortnite.jpg">
+          <figcaption>Fortnite</figcaption>
+        </figure>
+
+        <figure id="legomasters">
+          <img src="/assets/legomasters.jpg">
+          <figcaption>Legomasters</figcaption>
+        </figure>
+
+        <figure id="fifa">
+          <img src="/assets/fifa.jpg">
+          <figcaption>Fifa</figcaption>
+        </figure>
+
+
+
       </section>
       
     </main>
     <footer>
       <p>&copy; 2023 PlayStation</p>
     </footer>
+    <script src="./js/landing-page.js"></script>
   </body>
 </html>
