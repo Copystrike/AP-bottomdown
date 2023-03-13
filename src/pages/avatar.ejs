@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite</title>
+</head>
+<body>
+  <h1>Fortnite Items</h1>
+  <div>
+    <% for (let i = 1; i < 5; i++) { %>
+      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>">
+      <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set as Avatar</button>
+    <% } %>
+  </div>
+  <script>
+    function setAvatar(avatarUrl) {
+      const avatar = document.createElement('img');
+      avatar.src = avatarUrl;
+      const avatarContainer = document.getElementById('avatar-container');
+      avatarContainer.innerHTML = '';
+      avatarContainer.appendChild(avatar);
+    }
+  </script>
+  <div id="avatar-container"></div>
+</body>
+</html>
