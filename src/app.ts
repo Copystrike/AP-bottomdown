@@ -11,10 +11,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/test", (req, res) => {
-  res.render("test");
-});
-
 // Starting the server
 app.listen(PORT_NUMBER, () => {
   console.log(`SERVER RUNNING ON ${PORT_NUMBER}`);
