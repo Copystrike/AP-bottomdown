@@ -1,8 +1,6 @@
 const scrollContainer = document.querySelector('.games');
 
 scrollContainer.addEventListener('mousemove', (event) => {
-  
-
   const scrollSpeed = 20;
   const direction = event.clientX < window.innerWidth / 2 ? -1 : 1;
 
@@ -10,8 +8,4 @@ scrollContainer.addEventListener('mousemove', (event) => {
 
     scrollContainer.scrollLeft += direction * scrollSpeed;
   }
-  
-
-  
-
 });
