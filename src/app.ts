@@ -42,16 +42,13 @@ axios.get<FortniteItem>(FORTNITE_API_URL).then((axiosResponse) => {
   });
 });
 
-<<<<<<< HEAD
 app.get("/test", (req, res) => {
   res.render("test");
 });
-=======
 // random constaint function
 const randomConstraint = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
->>>>>>> origin/avatar
 
 // Starting the server
 app.listen(PORT_NUMBER, () => {
