@@ -35,6 +35,7 @@ body {
   
   h1 {
     font-size: 3rem;
+    text-align: center;
   }
   
   footer {
@@ -64,15 +65,40 @@ body {
     height: 250px;
     object-fit: cover;
     border: 2px solid #0072c6;
-
-
-    
-
     /*img vergroten */
     transition: transform 0.2s ease-in-out;
 
+  
+
+border-radius: 10px;
+  }
+
+  section{
+    justify-content: center;
+  }
+
+   button{
+    border-radius: 0.5em;
+    padding: 0.25em 0.5em;
+    font-weight: bold;
+  }
+
+  #win:hover{
+    background-color: lightgreen;
+  }
+  
+  #loss:hover{
+    background-color: red;
+  }
+
+  input {
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 16px; /* Font size */
   }
 
   img:hover {
     transform: scale(1.2);
   }
+  
+
+
