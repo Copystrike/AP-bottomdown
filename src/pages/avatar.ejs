@@ -1,74 +1,18 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortnite</title>
-    <style>
-
-header {
-  background-color: #333;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* add this line to center the items vertically */
-  padding: 10px;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  margin: 0 10px;
-}
-
-nav li a {
-  color: #fff;
-  text-decoration: none;
-}
-      
-#avatar-container > img {
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  margin-left: 10px;
-      }
-      </style>
-</head>
-<body>
-  <header>
-      <nav>
-    <ul>
-    <li><a class="active" href="#home">Home</a></li>
-    <li><a href="#contact">Favorieten</a></li>
-    <li><a href="#about">Blacklisted</a></li>
-    <li><div id="avatar-container"></div></li>
-  </ul>
-  </nav>
-  </header>
-
-  <div>
-    <% for (let i = 1; i < 5; i++) { %>
-      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="./css/avatar.css" />
+    <script defer src="./js/avatar.js"></script>
+  </head>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+    <div>
+      <% for (let i = 1; i < 5; i++) { %>
+      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px" />
       <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
-    <% } %>
-  </div>
-  <script>
-    function setAvatar(avatarUrl) {
-      const avatar = document.createElement('img');
-      avatar.src = avatarUrl;
-      const avatarContainer = document.getElementById('avatar-container');
-      avatarContainer.innerHTML = '';
-      avatarContainer.appendChild(avatar);
-    }
-  </script>
-
-  <!--<div id="avatar-container"></div>-->
-  
-</body>
+      <% } %>
+    </div>
+    <%- include('../partials/foot.ejs') %>
+  </body>
 </html>
