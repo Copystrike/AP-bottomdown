@@ -16,7 +16,6 @@ scrollContainer.addEventListener('mousemove', (event) => {
 
 
 
-
 function openForm() {
   document.getElementById("loginForm").style.display = "block";
 }

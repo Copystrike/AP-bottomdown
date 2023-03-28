@@ -97,9 +97,9 @@ img:hover {
 
 /* The popup form - hidden by default */
 .form-popup {
-  display: none;
-  position: fixed;
-  bottom: 0;
+  display:block;
+  position:fixed;
+  top: 0;
   right: 15px;
   border: 3px solid #f1f1f1;
   z-index: 9;
@@ -114,7 +114,7 @@ img:hover {
 
 /* Full-width input fields */
 .form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
+  width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
   border: none;
@@ -139,12 +139,7 @@ img:hover {
   opacity: 0.8;
 }
 
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+.form-container .btn:hover {
   opacity: 1;
 }
