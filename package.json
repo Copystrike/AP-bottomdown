@@ -22,7 +22,7 @@
     "start": "cross-env NODE_ENV=productidon node dist/app.js",
     "dev": " cross-env NODE_ENV=development ts-node-dev src/app.ts",
     "build": "tsc",
-    "lint": "eslint . --ext .ts"
+    "pretty": "prettier --write src/**/*.{ts,js}"
   },
   "keywords": [],
   "author": "",

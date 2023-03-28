@@ -1,0 +1,12 @@
+#win:hover {
+  background-color: lightgreen;
+}
+
+#loss:hover {
+  background-color: red;
+}
+
+input {
+  cursor: pointer;
+  font-size: 16px;
+}
