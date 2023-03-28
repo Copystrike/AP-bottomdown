@@ -11,7 +11,42 @@ scrollContainer.addEventListener('mousemove', (event) => {
     scrollContainer.scrollLeft += direction * scrollSpeed;
   }
   
-
-  
-
 });
+
+
+
+// Login gedeelte, moet sowiso nog uitgewerkt worden
+
+let loggedIn = false;
+
+function checkIfLoggedIn(page) {
+
+  if (loggedIn == false) {
+    openForm();
+  }
+  else if (loggedIn == true) {
+    if (page == "nogame") {
+      window.location.href = "./nogame";
+    }
+  
+    else if (page == "fortnite") {
+      window.location.href = "./avatar";
+    }
+  }
+  
+}
+
+function openForm() {
+  document.getElementById("loginForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("loginForm").style.display = "none";
+}
+
+
+// Dit moet nog verder uitgewerkt worden
+function checkCredentials() {
+  loggedIn = true;
+  document.getElementById("loginForm").style.display = "none";
+}
