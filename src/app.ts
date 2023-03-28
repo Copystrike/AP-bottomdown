@@ -1,6 +1,4 @@
 import express, { Application, response } from "express";
-
-import express, { Application, response } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import { IS_DEV } from "./constants";
 import axios from "axios";
@@ -13,41 +11,17 @@ app.use(express.static("src/public")); // To serve static files such as images, 
 app.set("view engine", "ejs"); // To set the view engine
 app.set("views", "src/pages"); // To set the views directory
 app.disable("view cache"); // disable view cache
-app.disable('view cache'); // disable view cache
 
 app.get("/", async (req, res) => {
   res.render("index");
 });
 
-axios.get<FortniteItem>(FORTNITE_API_URL).then((axiosResponse) => {
-  app.get("/avatar", async (req, res) => {
-    const response = axiosResponse.data;
-    const outfitItems = response.data.filter((item) => item.item.type === "outfit");
-
-    // randomItems
-    const randomItems: MetaData[] = [];
-    for (let i = 0; i < 10; i++) {
-      const randomItemIndex = randomConstraint(0, outfitItems.length - 1);
-      const item = outfitItems[randomItemIndex];
-
-      if (randomItems.includes(item)) {
-        i--;
-        continue;
-      }
-      randomItems.push(item);
-    }
-
-    try {
-      res.render("avatar", { items: randomItems });
-    } catch (error) {
-      console.error(error);
-      res.send("Error!");
-    }
-  });
-});
-
 app.get("/nogame", (req, res) => {
   res.render("nogame");
+});
+
+app.get("/favoriete", (req, res) => {
+  res.render("favoriete");
 });
 
 axios.get<FortniteItem>(FORTNITE_API_URL).then((axiosResponse) => {
