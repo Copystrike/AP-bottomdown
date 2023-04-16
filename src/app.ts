@@ -12,16 +12,19 @@ app.set("view engine", "ejs"); // To set the view engine
 app.set("views", "src/pages"); // To set the views directory
 app.disable("view cache"); // disable view cache
 
+const staticPage = (page: string) => {
+  app.get(`/${page}`, (req, res) => {
+    res.render(page);
+  });
+};
+
+// - Routes
+// -- Snelle manier om alle statische pagina's te renderen
+const staticPages = ["index", "login", "nogame", "favoriete"];
+staticPages.forEach((page) => staticPage(page));
+
 app.get("/", async (req, res) => {
   res.render("index");
-});
-
-app.get("/nogame", (req, res) => {
-  res.render("nogame");
-});
-
-app.get("/favoriete", (req, res) => {
-  res.render("favoriete");
 });
 
 axios.get<FortniteItem>(FORTNITE_API_URL).then((axiosResponse) => {

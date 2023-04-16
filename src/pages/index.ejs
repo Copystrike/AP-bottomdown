@@ -14,22 +14,6 @@
       <%- include('../partials/nav.ejs') %>
     </header>
     <main>
-      <!-- De Login form, action moet mss nog uitgewerkt worden -->
-      <div class="form-popup" id="loginForm">
-        <form action="/api/login" method="post" class="form-container">
-          <h1>Login</h1>
-          <p>You have to be logged in before selecting a game...</p>
-
-          <label for="username"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username" name="username" required />
-
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required />
-
-          <button type="submit" class="btn">Login</button>
-        </form>
-      </div>
-
       <section class="games">
         <figure id="mtg">
           <a href="/nogame"><img src="/assets/mtg.jpg" ref /></a>
