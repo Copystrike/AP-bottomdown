@@ -14,15 +14,15 @@
   </header>
   <!-- De Login form, action moet mss nog uitgewerkt worden -->
   <div class="form-container">
-    <form action="/api/login" method="post" class="form-container">
+    <form class="login-form">
       <h1>Login</h1>
       <p>You have to be logged in before selecting a game...</p>
 
       <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username" required />
+      <input type="text" placeholder="Enter Username" name="username" id="username-login" required />
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required />
+      <input type="password" placeholder="Enter Password" name="psw" id="password-login" required />
 
       <button type="submit" class="btn">Login</button>
     </form>
