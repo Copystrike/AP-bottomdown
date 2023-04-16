@@ -3,27 +3,40 @@
   <head>
     <%- include('../partials/head.ejs') %>
     <script defer src="./js/avatar.js"></script>
-    <link rel="stylesheet" href="./css/avatar.css">
+    <link rel="stylesheet" href="./css/avatar.css" />
+    <link rel="stylesheet" href="./css/functies/modal.css" />
   </head>
   <body>
     <header>
-      <img src="/assets/logo.png" alt="PlayStation 4 Logo" />
+      <img src="/assets/logo.png" alt="Fortnite Logo" />
       <%- include('../partials/nav.ejs') %>
     </header>
+    <!-- Avatar list -->
     <div>
       <% for (let i = 1; i < 5; i++) { %>
       <img class="avatar-list-item" src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px" />
       <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
-      <button id="myButton">Meer Info</button>
+      <button class="modal-btn">Meer Info</button>
       <% } %>
     </div>
-    <div id="myPopup" class="popup">
-      <div class="popup-content">
-        <h2>Info Avatar</h2>
-        <p>Popupbox</p>
-        <button id="closePopup">Sluit</button>
+    <!-- popup -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-close">&times;</span>
+          <h2>Modal Header</h2>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the Modal Body</p>
+          <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+          <h3>Modal Footer</h3>
+        </div>
       </div>
     </div>
+    <!-- footer -->
     <%- include('../partials/foot.ejs') %>
+    <script defer src="./js/functies/modal.js"></script>
   </body>
 </html>
