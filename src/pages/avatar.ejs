@@ -7,6 +7,9 @@
     <title>Fortnite</title>
     <style>
 
+* {
+  background-color: #333;
+}
 header {
   background-color: #333;
   color: #fff;
@@ -38,6 +41,35 @@ nav li a {
   width: 40px;
   margin-left: 10px;
       }
+      .popup {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+        }
+        .popup-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 30%;
+            font-weight: bolder;
+        }
+        .popup-content button {
+            display: block;
+            margin: 0 auto;
+        }
+        .show {
+            display: block;
+        }
+        h1 {
+            color: green;
+        }
       </style>
 </head>
 <body>
@@ -56,8 +88,22 @@ nav li a {
     <% for (let i = 1; i < 5; i++) { %>
       <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px">
       <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
+      <button id="myButton">
+        Meer Info
+    </button>
     <% } %>
   </div>
+<div id="myPopup" class="popup">
+  <div class="popup-content">
+      <h2>
+            Info Avatar
+        </h2>
+      <p>Popupbox</p>
+      <button id="closePopup">
+            Sluit
+        </button>
+  </div>
+</div>
   <script>
     function setAvatar(avatarUrl) {
       const avatar = document.createElement('img');
@@ -66,6 +112,17 @@ nav li a {
       avatarContainer.innerHTML = '';
       avatarContainer.appendChild(avatar);
     }
+    myButton.addEventListener("click", function () {
+            myPopup.classList.add("show");
+        });
+        closePopup.addEventListener("click", function () {
+            myPopup.classList.remove("show");
+        });
+        window.addEventListener("click", function (event) {
+            if (event.target == myPopup) {
+                myPopup.classList.remove("show");
+            }
+        });
   </script>
 
   <!--<div id="avatar-container"></div>-->
