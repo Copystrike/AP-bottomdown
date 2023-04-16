@@ -1,46 +1,16 @@
 /* Alle css dat alleen op de avatar pagina gaat */
 
-#avatar-container > img {
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  margin-left: 10px;
+.avatar-select-container {
+  display: flex;
+  justify-content: center;
+  place-content: space-evenly;
+  flex-wrap: wrap;
 }
 
-.popup {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: none;
-}
-
-.popup-content {
-  background-color: white;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888888;
-  width: 30%;
-  font-weight: bolder;
-}
-
-.popup-content button {
-  display: block;
-  margin: 0 auto;
-}
-
-.show {
-  display: block;
-}
-
-h1 {
-  color: green;
-}
-
-.avatar-list-item:hover {
+.avatar-select-item > img:hover  {
   transform: scale(1.1);
+}
+
+.avatar-select-item > button {
+  z-index: 100;
 }

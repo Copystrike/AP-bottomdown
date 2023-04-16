@@ -1,22 +1,22 @@
-/* The Modal (background) */
+/* The Modal zelf */
+
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  -webkit-animation-name: fadeIn; /* Fade in the background */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-animation-name: fadeIn;
   -webkit-animation-duration: 0.4s;
   animation-name: fadeIn;
   animation-duration: 0.4s;
 }
 
-/* Modal Content */
 .modal-content {
   position: fixed;
   bottom: 0;
@@ -28,7 +28,9 @@
   animation-duration: 0.4s;
 }
 
-/* The Close Button */
+
+/* Alles in de modal */
+
 .modal-close {
   color: white;
   float: right;
