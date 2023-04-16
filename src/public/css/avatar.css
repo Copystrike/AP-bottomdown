@@ -1,28 +1,16 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+/* Alle css dat alleen op de avatar pagina gaat */
+
+.avatar-select-container {
+  display: flex;
+  justify-content: center;
+  place-content: space-evenly;
+  flex-wrap: wrap;
 }
 
-li {
-  float: left;
+.avatar-select-item > img:hover  {
+  transform: scale(1.1);
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 50px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
-}
-
-#avatar-container > img {
-  width: 150px;
-  float: right;
+.avatar-select-item > button {
+  z-index: 100;
 }
