@@ -1,131 +1,28 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortnite</title>
-    <style>
-
-* {
-  background-color: #333;
-}
-header {
-  background-color: #333;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* add this line to center the items vertically */
-  padding: 10px;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  margin: 0 10px;
-}
-
-nav li a {
-  color: #fff;
-  text-decoration: none;
-}
-      
-#avatar-container > img {
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  margin-left: 10px;
-      }
-      .popup {
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            display: none;
-        }
-        .popup-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888888;
-            width: 30%;
-            font-weight: bolder;
-        }
-        .popup-content button {
-            display: block;
-            margin: 0 auto;
-        }
-        .show {
-            display: block;
-        }
-        h1 {
-            color: green;
-        }
-      </style>
-</head>
-<body>
-  <header>
-      <nav>
-    <ul>
-    <li><a class="active" href="#home">Home</a></li>
-    <li><a href="#contact">Favorieten</a></li>
-    <li><a href="#about">Blacklisted</a></li>
-    <li><div id="avatar-container"></div></li>
-  </ul>
-  </nav>
-  </header>
-
-  <div>
-    <% for (let i = 1; i < 5; i++) { %>
-      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <script defer src="./js/avatar.js"></script>
+  </head>
+  <body>
+    <header>
+      <img src="/assets/logo.png" alt="PlayStation 4 Logo" />
+      <%- include('../partials/nav.ejs') %>
+    </header>
+    <div>
+      <% for (let i = 1; i < 5; i++) { %>
+      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px" />
       <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
-      <button id="myButton">
-        Meer Info
-    </button>
-    <% } %>
-  </div>
-<div id="myPopup" class="popup">
-  <div class="popup-content">
-      <h2>
-            Info Avatar
-        </h2>
-      <p>Popupbox</p>
-      <button id="closePopup">
-            Sluit
-        </button>
-  </div>
-</div>
-  <script>
-    function setAvatar(avatarUrl) {
-      const avatar = document.createElement('img');
-      avatar.src = avatarUrl;
-      const avatarContainer = document.getElementById('avatar-container');
-      avatarContainer.innerHTML = '';
-      avatarContainer.appendChild(avatar);
-    }
-    myButton.addEventListener("click", function () {
-            myPopup.classList.add("show");
-        });
-        closePopup.addEventListener("click", function () {
-            myPopup.classList.remove("show");
-        });
-        window.addEventListener("click", function (event) {
-            if (event.target == myPopup) {
-                myPopup.classList.remove("show");
-            }
-        });
-  </script>
-
-  <!--<div id="avatar-container"></div>-->
-  
-</body>
+      <button id="myButton">Meer Info</button>
+      <% } %>
+    </div>
+    <div id="myPopup" class="popup">
+      <div class="popup-content">
+        <h2>Info Avatar</h2>
+        <p>Popupbox</p>
+        <button id="closePopup">Sluit</button>
+      </div>
+    </div>
+    <%- include('../partials/foot.ejs') %>
+  </body>
 </html>
