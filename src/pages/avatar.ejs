@@ -12,7 +12,7 @@
     </header>
     <div>
       <% for (let i = 1; i < 5; i++) { %>
-      <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px" />
+      <img class="avatar-list-item" src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px" />
       <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
       <button id="myButton">Meer Info</button>
       <% } %>

@@ -1,3 +1,5 @@
+/* Alle css dat alleen op ALLE paginas gaat */
+
 body {
   margin: 0;
   padding: 0;
@@ -71,8 +73,4 @@ button {
   border-radius: 0.5em;
   padding: 0.25em 0.5em;
   font-weight: bold;
-}
-
-img:hover {
-  transform: scale(1.2);
 }

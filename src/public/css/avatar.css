@@ -1,9 +1,12 @@
+/* Alle css dat alleen op de avatar pagina gaat */
+
 #avatar-container > img {
   border-radius: 50%;
   height: 40px;
   width: 40px;
   margin-left: 10px;
 }
+
 .popup {
   position: fixed;
   z-index: 1;
@@ -15,6 +18,7 @@
   background-color: rgba(0, 0, 0, 0.4);
   display: none;
 }
+
 .popup-content {
   background-color: white;
   margin: 10% auto;
@@ -23,13 +27,20 @@
   width: 30%;
   font-weight: bolder;
 }
+
 .popup-content button {
   display: block;
   margin: 0 auto;
 }
+
 .show {
   display: block;
 }
+
 h1 {
   color: green;
+}
+
+.avatar-list-item:hover {
+  transform: scale(1.1);
 }
