@@ -65,6 +65,7 @@ footer {
   border-radius: 10px;
 }
 
+<<<<<<< Updated upstream
 section {
   justify-content: center;
 }
@@ -82,3 +83,47 @@ button {
   margin-left: 10px;
   cursor: pointer;
 }
+=======
+  
+
+border-radius: 10px;
+  }
+
+  section{
+    justify-content: center;
+  }
+
+   button{
+    border-radius: 0.5em;
+    padding: 0.25em 0.5em;
+    font-weight: bold;
+  }
+
+  #win:hover{
+    background-color: lightgreen;
+    transform: scale(1.1);
+  }
+  
+  #loss:hover{
+    background-color: red;
+    transform: scale(1.1);
+  }
+
+  input {
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 16px; /* Font size */
+  }
+
+  img:hover {
+    transform: scale(1.2);
+  }
+  #delete-btn {
+    font-size: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+  }
+>>>>>>> Stashed changes

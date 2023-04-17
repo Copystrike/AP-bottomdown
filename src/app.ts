@@ -49,6 +49,14 @@ dirs.forEach((dir) => {
 const staticPages = ["index", "login", "nogame", "favoriete", "blacklist"];
 staticPages.forEach((page) => staticPage(page));
 
+app.get("/blacklist", (req, res) => {
+  res.render("blacklist");
+});
+
+app.get("/avatar", (req, res) => {
+  res.render("avatar");
+});
+
 // Starting the server
 app.listen(PORT_NUMBER, () => {
   console.log(`SERVER RUNNING ON http://127.0.0.1:${PORT_NUMBER}/`);

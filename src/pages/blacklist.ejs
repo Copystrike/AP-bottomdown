@@ -2,21 +2,28 @@
 <html lang="nl-BE">
 
 <head>
-  <%- include('../partials/head.ejs') %>
-  <script defer src="./js/login.js"></script>
-  <link rel="stylesheet" href="./css/login.css" />
+    <%- include('../partials/head.ejs') %>
+        <script defer src="./js/login.js"></script>
+        <link rel="stylesheet" href="./css/login.css" />
 </head>
 
 <body>
-  <header>
-    <img src="/assets/logo.png" alt="Fortnite Logo" />
-    <%- include('../partials/nav.ejs') %>
-  </header>
-  <!-- De Login form, action moet mss nog uitgewerkt worden -->
-  <h1>Sorry, je kan hier niet aan deelnemen, de game werd niet gevonden...</h1>
-  <!-- footer -->
-  <%- include('../partials/foot.ejs') %>
-  <script defer src="./js/functies/modal.js"></script>
+    <header>
+        <img src="/assets/logo.png" alt="Fortnite Logo" />
+        <%- include('../partials/nav.ejs') %>
+    </header>
+    <!-- De Login form, action moet mss nog uitgewerkt worden -->
+    <main>
+
+        <h1>Blacklisted avatars</h1>
+        <p id="h1">Hier vind je de blacklisted avatars terug</p>
+
+        <img src="" alt="" height="100" width="100">
+        <button id="delete-btn">Verwijder</button>
+        <!-- footer -->
+    </main>
+    <%- include('../partials/foot.ejs') %>
+        <script defer src="./js/functies/modal.js"></script>
 </body>
 
 </html>
