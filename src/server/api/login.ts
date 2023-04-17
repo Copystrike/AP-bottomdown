@@ -10,12 +10,12 @@ router.post("/", async (req: any, res: any) => {
   const username = body.username;
   const password = body.password;
 
-  if (!username && !password) {
+  if (!username || !password) {
     return res.status(400).json({ message: "Username or password is missing" });
   }
 
   // DIT IS MAAR TIJDELIJK
-  if (username === "admin" || password === "password") {
+  if (username === "admin" && password === "password") {
     res.cookie("session", "123456");
     return res.status(200).json({ message: "Correct" });
   } else {
