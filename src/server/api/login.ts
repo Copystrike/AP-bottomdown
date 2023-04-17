@@ -10,7 +10,7 @@ router.post("/", async (req: any, res: any) => {
   const username = body.username;
   const password = body.password;
 
-  if (!username || !password) {
+  if (!username && !password) {
     return res.status(400).json({ message: "Username or password is missing" });
   }
 
