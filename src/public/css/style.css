@@ -1,3 +1,5 @@
+/* Alle css dat alleen op ALLE paginas gaat */
+
 body {
   margin: 0;
   padding: 0;
@@ -111,8 +113,11 @@ button {
   font-weight: bold;
 }
 
-.game:hover {
-  transform: scale(1.2);
+#avatar-container > .game {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-left: 10px;
 }
 
 
