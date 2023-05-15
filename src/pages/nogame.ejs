@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html lang="nl-BE">
+<html>
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
+  <body>
+    <header>
+    </header>
+    <main>
+      <div class="nogamepage">
+        <img src="/assets/error-emoji.png" alt="error">
 
-<head>
-  <%- include('../partials/head.ejs') %>
-  <script defer src="./js/login.js"></script>
-  <link rel="stylesheet" href="./css/login.css" />
-</head>
+        <div class="nogamepagecontent">
+        <h1>Error, game not found. Please insert the right game.</h1>
+        <a href="/"><h3>Go back to the landing page</h3></a>
+        </div>
+      
+      </div>
 
-<body>
-  <header>
-    <img src="/assets/logo.png" alt="Fortnite Logo" />
-  </header>
-  <!-- De Login form, action moet mss nog uitgewerkt worden -->
-  <h1>Sorry, je kan hier niet aan deelnemen, de game werd niet gevonden...</h1>
-  <!-- footer -->
-  <%- include('../partials/foot.ejs') %>
-  <script defer src="./js/functies/modal.js"></script>
-</body>
+      
 
+    </main>
+
+
+    <%- include('../partials/foot.ejs') %>
+  </body>
 </html>
