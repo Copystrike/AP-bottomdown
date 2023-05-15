@@ -1,9 +1,16 @@
 import express, { Application, response } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
-
 const fs = require("fs");
 const path = require("path");
+import { IS_DEV } from "./constants";
+import axios from "axios";
+import { FortniteItem, MetaData } from "./types/fortnite";
+import { FORTNITE_API_URL } from "./constants";
+import { MongoClient, ObjectId } from "mongodb";
+
+const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
 
 const app: Application = express();
 app.use(express.json()); // To parse the incoming requests with JSON payloads
@@ -48,6 +55,21 @@ dirs.forEach((dir) => {
 // -- als de pagina naam zelde is als de file naam en heeft geen backend data nodig dan kan je hem hier inzetten
 const staticPages = ["index", "login", "nogame", "favoriete", "blacklist"];
 staticPages.forEach((page) => staticPage(page));
+
+const main = async () => {
+    
+  try {
+      await client.connect();
+      console.log("CONNECTED TO DATABASE");
+  }
+  catch (e){
+      console.log(e);
+  }
+  finally {
+      await client.close();
+  }
+}
+main();
 
 // Starting the server
 app.listen(PORT_NUMBER, () => {
