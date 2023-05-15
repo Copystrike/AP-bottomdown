@@ -1,12 +1,14 @@
 import { MongoClient } from "mongodb";
 
 const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
-const databaseClient = new MongoClient(uri);
+const client = new MongoClient(uri);
+
+const databaseClient = client.db("bottomg");
 
 // connect to database
 const connectDatabase = async () => {
     try {
-        await databaseClient.connect();
+        await client.connect();
         console.log("CONNECTED TO DATABASE");
         process.on("SIGINT", async () => {
             await closeDatabase();
@@ -19,7 +21,7 @@ const connectDatabase = async () => {
 // close database
 const closeDatabase = async () => {
     try {
-        await databaseClient.close();
+        await client.close();
         console.log("DISCONNECTED FROM DATABASE");
     } catch (error) {
         console.error(error);
