@@ -1,13 +1,9 @@
 import express, { Application, response } from "express";
 import { PORT_NUMBER } from "./config/debug";
-import { IS_DEV } from "./constants";
 import axios from "axios";
 import { FortniteItem, MetaData } from "./types/fortnite";
 import { FORTNITE_API_URL } from "./constants";
-import { MongoClient, ObjectId } from "mongodb";
-
-const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri);
+import { connectDatabase } from "./database/database";
 
 const app: Application = express();
 app.use(express.json()); // To parse the incoming requests with JSON payloads
@@ -60,22 +56,8 @@ const randomConstraint = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const main = async () => {
-    
-  try {
-      await client.connect();
-      console.log("CONNECTED TO DATABASE");
-  }
-  catch (e){
-      console.log(e);
-  }
-  finally {
-      await client.close();
-  }
-}
-main();
-
 // Starting the server
 app.listen(PORT_NUMBER, () => {
+  connectDatabase();
   console.log(`SERVER RUNNING ON http://127.0.0.1:${PORT_NUMBER}/`);
 });
