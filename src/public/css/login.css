@@ -14,10 +14,13 @@
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 300px;
+  max-width: 450px;
   padding: 10px;
   background-color: white;
   margin: auto;
+
+  display:flex;
+  justify-content: center;
 }
 
 /* Full-width input fields */
@@ -53,3 +56,9 @@
 .form-container .btn:hover {
   opacity: 1;
 }
+
+
+
+/*   REGISTER.EJS CSS   */
+
+
