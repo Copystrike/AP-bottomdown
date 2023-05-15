@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <%- include('../partials/head.ejs') %>
+  <head>
+    <%- include('../partials/head.ejs') %>
+  </head>
   <body>
     <header>
-      <h1>Sorry, je kan hier niet aan deelnemen, de game werd niet gevonden...</h1>
     </header>
+    <main>
+      <div class="nogamepage">
+        <img src="/assets/error-emoji.png" alt="error">
+
+        <div class="nogamepagecontent">
+        <h1>Error, game not found. Please insert the right game.</h1>
+        <a href="/"><h3>Go back to the landing page</h3></a>
+        </div>
+      
+      </div>
+
+      
+
+    </main>
+
+
     <%- include('../partials/foot.ejs') %>
   </body>
 </html>
