@@ -11,14 +11,16 @@ function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   // Nu kunnen we deze ID gebruiken om de juiste data op te halen uit de database of de API
   // Hier is een link van waar we de ID hebben opgeslagen: https://github.com/Copystrike/AP-bottomdown/blob/14d142618e6aacfe8f6f77e3d9272811c5ad2d22/src/pages/avatar.ejs#L21
   const fortniteCharaterId = btn.getAttribute("data-fortnite-character-id");
+  const fortniteCharacterName = btn.getAttribute("data-fornite-character-name");
 
   const headerTitle = modelTitle.querySelector("h2");
   const headerFooter = modelFooter.querySelector("h3");
-  headerTitle.innerHTML = "Avatar Info";
+  headerTitle.innerHTML = `${fortniteCharacterName}`;
   headerFooter.innerHTML = "Footer";
 
   modelBody.innerHTML = `
     <p>Fortnite Character ID: ${fortniteCharaterId}</p>
+    
     `;
 }
 
