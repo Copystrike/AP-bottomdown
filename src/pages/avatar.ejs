@@ -15,20 +15,24 @@
     <!-- Avatar list -->
     <div class="avatar-select-container">
       <% for (let i = 1; i < 5; i++) { %>
-      <div class="avatar-select-item">
-        <img src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" width="250px" />
-        <div>
-          <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
-          <button type="button" class="btn btn-secondary" data-fortnite-character-id="<%= items[i].itemId %>" data-fornite-character-name="<%= items[i].itemId%>">Meer Info</button>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<%= items[i].item.images.icon%>/icon.png" alt="<%= items[i].item.name %>" />
+        <div class="card-body">
+          <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#myModal" data-fortnite-character-id="<%= items[i].itemId %>">
+            Meer Info
+          </button>
         </div>
       </div>
       <% } %>
     </div>
-    <!-- popup -->
-    <div id="modal"></div>
-    <!-- footer -->
+    </div>
+      <!-- Modal  -->
+      <div id="modal"></div>
+
+
     <%- include('../partials/foot.ejs') %>
     <script defer src="./js/functies/modal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

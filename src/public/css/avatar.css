@@ -1,10 +1,19 @@
 /* Alle css dat alleen op de avatar pagina gaat */
-
+body, footer, header{
+  background: rgb(13,112,255);
+background: linear-gradient(90deg, rgba(13,112,255,1) 0%, rgba(33,41,151,1) 100%);
+}
 .avatar-select-container {
   display: flex;
   justify-content: center;
   place-content: space-evenly;
   flex-wrap: wrap;
+  padding-top: 3%;
+}
+
+.card {
+  background: rgb(39,48,124);
+  background: linear-gradient(90deg, rgba(39,48,124,1) 100%, rgba(0,11,104,1) 100%);
 }
 
 .avatar-select-item > img:hover  {
@@ -12,5 +21,5 @@
 }
 
 .avatar-select-item > button {
-  z-index: 100;
+  align-items: center;
 }

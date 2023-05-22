@@ -5,6 +5,7 @@ import axios from "axios";
 import { FortniteItem, MetaData } from "./types/fortnite";
 import { FORTNITE_API_URL } from "./constants";
 import { MongoClient, ObjectId } from "mongodb";
+const fs = require('fs');
 
 const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
