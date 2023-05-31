@@ -25,3 +25,13 @@ function setAvatar(avatarUrl) {
   function modelClose() {
     console.log("model gesloten");
   }
+
+  $("form").submit(function(e) {
+    e.preventDefault();
+    var name=$("input[name='name]").val();
+    var reden=$("input[name='reden]").val();
+
+    $(".table tbody").append("<tr data-name='"+name+"' data-email='"+email+"'><td>"+name+"</td><td"+email+"</td><td><button class= 'deletebtn'>Verwijder</button></td></tr>");
+    
+    $("input[name='']").val("");
+  });
