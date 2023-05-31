@@ -1,13 +1,17 @@
 import express, { Application, response } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
+import { IS_DEV } from "./constants";
 import axios from "axios";
 import { FortniteItem, MetaData } from "./types/fortnite";
 import { FORTNITE_API_URL } from "./constants";
 import { connectDatabase } from "./database/database";
+import { MongoClient } from "mongodb";
 
 const fs = require("fs");
 const path = require("path");
+const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
 
 const app: Application = express();
 app.use(express.json()); // To parse the incoming requests with JSON payloads

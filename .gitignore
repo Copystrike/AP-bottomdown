@@ -2,4 +2,7 @@
 /dist
 *.env.*
 .vercel
+
+# Yarn
+package-lock.json 
 yarn.lock
