@@ -21,7 +21,7 @@ function setAvatar(avatarUrl) {
       <p>Fortnite Character ID: ${fortniteCharaterId}</p>
       `;
   }
-  
+
   function modelClose() {
     console.log("model gesloten");
   }

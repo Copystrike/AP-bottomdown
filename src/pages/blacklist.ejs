@@ -4,6 +4,7 @@
 <head>
     <%- include('../partials/head.ejs') %>
         <link rel="stylesheet" href="./css/blacklist.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 
 <body>
@@ -16,6 +17,10 @@
 
         <h1>Blacklisted avatars</h1>
         <p id="h1">Hier vind je de blacklisted avatars terug</p>
+            </tbody>
+          </table>
+          
+        
         <form>
         <div class="form-group">
             <label>Naam: </label>
@@ -35,34 +40,58 @@
                 <th>Actie</th>
             </thead>
             <tbody>
+                <tr>
                 <td>naam</td>
+                <td>avatar</td>
                 <td>reden</td>
-                <td><button class="deletebtn">Verwijder</button> <button class="edit">Edit</button></td>
-            </tbody>
+                <td><button type="button" class="btn btn-danger">Verwijder</button> <button type="button" class="btn btn-primary">Edit</button></td>
+            </tr>
+            <tr>
+                <td>naam</td>
+                <td>avatar</td>
+                <td>reden</td>
+                <td><button type="button" class="btn btn-danger">Verwijder</button> <button type="button" class="btn btn-primary">Edit</button></td>
+            </tr>
         </table>
 
     </main>
+
     <%- include('../partials/foot.ejs') %>
         <script defer src="./js/blacklisted.js"></script>
-        <script>
-            $("form").submit(function(e) {
-    e.preventDefault();
-    var name=$("input[name='name]").val();
-    var reden=$("input[name='reden]").val();
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+     <script>
+      //deletebtn//
+        document.addEventListener('DOMContentLoaded', function() {
+  var deleteButtons = document.getElementsByClassName('btn btn-danger');
+  
+  for (var i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', function() {
+      var row = this.parentNode.parentNode;
+      
+      row.parentNode.removeChild(row);
+    });
+  }
+});
 
-    $(".table tbody").append("<tr data-name='"+name+"' data-email='"+email+"'><td>"+name+"</td><td"+email+"</td><td><button class= 'deletebtn'>Verwijder</button></td></tr>");
-    
-    $("input[name='']").val("");
-  });
-  $('body').on('click','.deletebtn', function(){
-    $(this).parents('tr').remove();
-  });
-  $('body').on('click','.edit', function(){
-    var name =$ (this).parents('tr').attr('data-name');
-    var reden =$ (this).parents('tr').attr('data-reden');
-    $ (this).parents('tr').find('td:eq(0)').js("<input name='edit_text' value'"+name+"'>");
-    $ (this).parents('tr').find('td:eq(1)').js("<input name='edit_text' value'"+reden+"'>");
-  })
+//editbtn//
+
+document.addEventListener('DOMContentLoaded', function() {
+  var editButtons = document.getElementsByClassName('edit-button');
+  
+  for (var i = 0; i < editButtons.length; i++) {
+    editButtons[i].addEventListener('click', function() {
+      var row = this.parentNode.parentNode;
+      
+      var itemValue = row.cells[0].innerHTML;
+      
+      var updatedItemValue = prompt('Enter updated item value:', itemValue);
+      
+      row.cells[0].innerHTML = updatedItemValue;
+    });
+  }
+});
+
     </script>
 
 </body>
