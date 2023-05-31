@@ -113,10 +113,9 @@ button {
   font-weight: bold;
 }
 
-#avatar-container > .game {
+#avatar-container > img {
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 60px;
   margin-left: 10px;
 }
 
