@@ -3,10 +3,7 @@
 
 <head>
     <%- include('../partials/head.ejs') %>
-        <script defer src="./js/blacklisted.js"></script>
-        <link rel="stylesheet" href="./css/login.css" />
-
-        <%  %>
+        <link rel="stylesheet" href="./css/blacklist.css" />
 </head>
 
 <body>
@@ -24,10 +21,57 @@
     <% } %>
   </ul>
 
+        <h1>Blacklisted avatars</h1>
+        <p id="h1">Hier vind je de blacklisted avatars terug</p>
+        <form>
+        <div class="form-group">
+            <label>Naam: </label>
+            <input type="text" name="Naam" class="form-controle" value="avatar" required="">
+        </div>
+        <div class="form-group">
+            <label>Reden: </label>
+            <input type="text" name="reden" class="form-controle" value="reden" required="">
+        </div>
+        <button type="submit" class="submitbtn">submit</button>
+        </form><br>
+        <table class="table">
+            <thead>
+                <th>Naam</th>
+                <th>avatar</th>
+                <th>Reden</th>
+                <th>Actie</th>
+            </thead>
+            <tbody>
+                <td>naam</td>
+                <td>reden</td>
+                <td><button class="deletebtn">Verwijder</button> <button class="edit">Edit</button></td>
+            </tbody>
+        </table>
 
-  <!-- footer -->
-  <%- include('../partials/foot.ejs') %>
-  <script defer src="./js/functies/modal.js"></script>
+    </main>
+    <%- include('../partials/foot.ejs') %>
+        <script defer src="./js/blacklisted.js"></script>
+        <script>
+            $("form").submit(function(e) {
+    e.preventDefault();
+    var name=$("input[name='name]").val();
+    var reden=$("input[name='reden]").val();
+
+    $(".table tbody").append("<tr data-name='"+name+"' data-email='"+email+"'><td>"+name+"</td><td"+email+"</td><td><button class= 'deletebtn'>Verwijder</button></td></tr>");
+    
+    $("input[name='']").val("");
+  });
+  $('body').on('click','.deletebtn', function(){
+    $(this).parents('tr').remove();
+  });
+  $('body').on('click','.edit', function(){
+    var name =$ (this).parents('tr').attr('data-name');
+    var reden =$ (this).parents('tr').attr('data-reden');
+    $ (this).parents('tr').find('td:eq(0)').js("<input name='edit_text' value'"+name+"'>");
+    $ (this).parents('tr').find('td:eq(1)').js("<input name='edit_text' value'"+reden+"'>");
+  })
+        </script>
+
 </body>
 
 </html>

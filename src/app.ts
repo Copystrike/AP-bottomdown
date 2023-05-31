@@ -71,6 +71,10 @@ const main = async () => {
 }
 main();
 
+app.get("/blacklisttt", (req, res) => {
+  res.render("blacklisttt");
+});
+
 // Starting the server
 app.listen(PORT_NUMBER, () => {
   console.log(`SERVER RUNNING ON http://127.0.0.1:${PORT_NUMBER}/`);
