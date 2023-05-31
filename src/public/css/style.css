@@ -176,12 +176,4 @@ button {
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover {
-  opacity: 1;
 }
