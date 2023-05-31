@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+
+<head>
+  <%- include('../partials/head.ejs') %>
+  <script defer src="./js/register.js"></script>
+  <link rel="stylesheet" href="./css/login.css" />
+</head>
+
+<body>
+  <header>
+    <img src="/assets/logo.png" alt="Fortnite Logo" />
+  </header>
+  <div class="form-container">
+    <form class="register-form">
+      <h1>Create an account</h1>
+      <p>Create a unique username and password</p>
+
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter a unique username" name="username" id="username-login" required />
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter a unique password" name="psw" id="password-login" required />
+
+      <label for="psw"><b>Confirm password</b></label>
+      <input type="password" placeholder="Confirm your password" name="psw" id="password-login" required />
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
+  <!-- footer -->
+  <%- include('../partials/foot.ejs') %>
+  <script defer src="./js/functies/modal.js"></script>
+</body>
+
+</html>

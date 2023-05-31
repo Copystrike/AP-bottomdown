@@ -27,7 +27,7 @@ function injectModal() {
 
 function loadModel() {
   var modal = document.getElementById("modal");
-  var modalButtons = document.getElementsByClassName("modal-btn");
+  var modalButtons = document.getElementsByClassName("btn btn-secondary");
   var closeModal = document.getElementsByClassName("modal-close")[0];
 
   const modelTitle = document.getElementsByClassName("modal-header")[0];

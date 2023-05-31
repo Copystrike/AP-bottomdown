@@ -1,9 +1,13 @@
-import express, { Application, response } from "express";
+import express, { Application } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
+import { connectDatabase } from "./database/database";
+import { MongoClient } from "mongodb";
 
 const fs = require("fs");
 const path = require("path");
+const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
 
 const app: Application = express();
 app.use(express.json()); // To parse the incoming requests with JSON payloads
@@ -46,7 +50,7 @@ dirs.forEach((dir) => {
 // - Routes
 // -- Snelle manier om alle statische pagina's te renderen
 // -- als de pagina naam zelde is als de file naam en heeft geen backend data nodig dan kan je hem hier inzetten
-const staticPages = ["index", "login", "nogame", "favoriete", "blacklist"];
+const staticPages = ["index", "login", "nogame", "favoriete", "blacklist", "register"];
 staticPages.forEach((page) => staticPage(page));
 
 app.get("/blacklist", (req, res) => {
@@ -59,6 +63,7 @@ app.get("/avatar", (req, res) => {
 
 // Starting the server
 app.listen(PORT_NUMBER, () => {
+  connectDatabase();
   console.log(`SERVER RUNNING ON http://127.0.0.1:${PORT_NUMBER}/`);
 });
 
