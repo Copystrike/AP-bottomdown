@@ -1,10 +1,6 @@
-import express, { Application, response } from "express";
+import express, { Application } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
-import { IS_DEV } from "./constants";
-import axios from "axios";
-import { FortniteItem, MetaData } from "./types/fortnite";
-import { FORTNITE_API_URL } from "./constants";
 import { connectDatabase } from "./database/database";
 import { MongoClient } from "mongodb";
 
