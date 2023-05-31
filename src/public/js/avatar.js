@@ -3,7 +3,7 @@ function setAvatar(avatarUrl) {
   const avatar = document.createElement("img");
   avatar.src = avatarUrl;
   const avatarContainer = document.getElementById("avatar-container");
-  avatarContainer.innerHTML = "";
+  avatarContainer.innerHTML = "";ù
   avatarContainer.appendChild(avatar);
 }
 const filePath = 'fortnite-items.json';
@@ -38,18 +38,16 @@ function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   const headerTitle = modelTitle.querySelector("h5");
   const headerFooter = modelFooter.querySelector("h3");
 
-  fetch($`https://fortnite-api.com/v2/cosmetics/br/`)
   headerTitle.innerHTML = ``;
   // headerFooter.innerHTML = "Footer";
 
   modelBody.innerHTML = `
-    <p>Fortnite Character ID: ${fortniteCharacterId}</p>
+    <p>Character ID: ${fortniteCharacterId}</p>
     
     `;
 
 
 }
-console.log(getNameById(filePath, "11dabeb6-dc77-45e9-8467-25ebede8478c"));
 
 function modelClose() {
   console.log("model gesloten");

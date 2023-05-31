@@ -18,7 +18,7 @@ window.onload = function () {
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
-              <button onclick="setAvatar('<%= items[i].item.images.icon %>')">Set <%= items[i].item.name %> as Avatar</button>
+              <button onclick="setAvatar('<%= items[i].images.icon %>')">Set <%= items[i].name %> as Avatar</button>
             </div>
           </div>
         </div>

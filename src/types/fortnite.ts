@@ -19,3 +19,10 @@ interface Cosmetic {
     name: string;
   };
 }
+interface ResponseFortnite {
+  data : Cosmetic[]
+}
+
+export {
+  Cosmetic, ResponseFortnite
+}
