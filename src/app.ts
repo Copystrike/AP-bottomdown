@@ -1,14 +1,11 @@
-import express, { Application, response } from "express";
+import express, { Application } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
+import { connectDatabase } from "./database/database";
+import { MongoClient } from "mongodb";
+
 const fs = require("fs");
 const path = require("path");
-import { IS_DEV } from "./constants";
-import axios from "axios";
-import { FortniteItem, MetaData } from "./types/fortnite";
-import { FORTNITE_API_URL } from "./constants";
-import { MongoClient, ObjectId } from "mongodb";
-
 const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
@@ -56,23 +53,9 @@ dirs.forEach((dir) => {
 const staticPages = ["index", "login", "nogame", "favoriete", "blacklist", "register"];
 staticPages.forEach((page) => staticPage(page));
 
-const main = async () => {
-    
-  try {
-      await client.connect();
-      console.log("CONNECTED TO DATABASE");
-  }
-  catch (e){
-      console.log(e);
-  }
-  finally {
-      await client.close();
-  }
-}
-main();
-
 // Starting the server
 app.listen(PORT_NUMBER, () => {
+  connectDatabase();
   console.log(`SERVER RUNNING ON http://127.0.0.1:${PORT_NUMBER}/`);
 });
 

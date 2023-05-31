@@ -75,10 +75,3 @@ export enum Type {
   Spray = "spray",
   Wrap = "wrap",
 }
-
-interface fortniteObject {
-  name : string,
-  imageurl : string,
-  win : number,
-  loss: number
-}
