@@ -1,6 +1,10 @@
 import express, { Application, response } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
+import axios from "axios";
+import { FortniteItem, MetaData } from "./types/fortnite";
+import { FORTNITE_API_URL } from "./constants";
+import { connectDatabase } from "./database/database";
 
 const fs = require("fs");
 const path = require("path");
@@ -51,6 +55,7 @@ staticPages.forEach((page) => staticPage(page));
 
 // Starting the server
 app.listen(PORT_NUMBER, () => {
+  connectDatabase();
   console.log(`SERVER RUNNING ON http://127.0.0.1:${PORT_NUMBER}/`);
 });
 
