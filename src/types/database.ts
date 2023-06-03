@@ -44,7 +44,7 @@ export interface Notes {
     user_id: ObjectId,
 
     fortnite_id: string,
-    note: string,
+    text: string,
 }
 
 export interface DataResonse<T> {

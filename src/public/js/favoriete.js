@@ -57,13 +57,12 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
 
   const character = await fetchCosmeticsById([fortniteCharacterId]);
 
-  modelTitle.innerHTML = `<b>Information</b>`;
+  modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
   modelBody.innerHTML = `
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>${character.name}</h2>
           <p><strong>Description:</strong> ${character.description}</p>
           <p><strong>Type:</strong> ${character.type.value}</p>
           <p><strong>Rarity:</strong> ${character.rarity.value}</p>
@@ -90,7 +89,7 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   `;
 
 
-  injectAddFormNote();
+  injectAddFormNote(fortniteCharacterId);
 }
 
 function addWin(fortniteCharacterId) {
@@ -125,17 +124,70 @@ function removeFavorite(fortniteCharacterId) {
   });
 }
 
-function injectAddFormNote() {
+
+async function injectAddFormNote(fortniteCharacterId) {
   const form = document.getElementById('add-note-form');
   const input = document.getElementById('note-text');
-  const list = document.getElementById('notes-list');
 
   form.addEventListener('submit', event => {
     event.preventDefault();
     const text = input.value.trim();
     if (text) {
-      notebook.addNote(text);
-      input.value = '';
+      addNoteToDatabase({ text }, fortniteCharacterId).then(note => {
+        addNoteToList(note.data);
+        input.value = '';
+      });
     }
   });
+
+  fetch(`/api/notes/${fortniteCharacterId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((note) => {
+        addNoteToList(note);
+      });
+    });
+}
+
+function addNoteToList(note) {
+  const list = document.getElementById('notes-list');
+  const listItem = document.createElement('li');
+  listItem.setAttribute('data-id', note._id);
+  listItem.innerHTML = `
+    <span>${note.text}</span>
+    <button class="btn btn-danger btn-sm ml-2">Delete</button>
+  `;
+  listItem.querySelector('button').addEventListener('click', () => {
+    const noteId = listItem.getAttribute('data-id');
+    // Do something with the note ID, such as delete it from the database
+    listItem.remove();
+  });
+  list.appendChild(listItem);
+}
+
+async function addNoteToDatabase(note, fortniteCharacterId) {
+  // Code to add the note to the database
+  // For example, using fetch to make a POST request to a server
+  const response = await fetch(`/api/notes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      fortniteCharacterId,
+      text: note.text
+    })
+  });
+  const data = await response.json();
+  return data;
+}
+
+async function removeNoteFromDatabase(noteId) {
+  // Code to remove the note from the database
+  // For example, using fetch to make a DELETE request to a server
+  const response = await fetch(`/api/notes/${noteId}`, {
+    method: 'DELETE'
+  });
+  const data = await response.json();
+  return data;
 }

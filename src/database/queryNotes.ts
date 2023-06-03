@@ -20,14 +20,19 @@ const getNotesByUserIdAndFortniteId = async (user_id: ObjectId, fortnite_id: str
 };
 
 // add a new note
-const addNote = async (user_id: ObjectId, fortnite_id: string, note: string): Promise<DataResonse<string>> => {
+const addNote = async (user_id: ObjectId, fortnite_id: string, text: string): Promise<DataResonse<Notes>> => {
     try {
         const result = await databaseClient.collection<Omit<Notes, '_id'>>("notes").insertOne({
-            user_id, fortnite_id, note,
+            user_id, fortnite_id, text,
         });
         return {
             success: true,
-            data: result.insertedId.toJSON()
+            data: {
+                _id: result.insertedId,
+                user_id,
+                fortnite_id,
+                text,
+            }
         };
     } catch (error) {
         console.error(error);
@@ -39,9 +44,9 @@ const addNote = async (user_id: ObjectId, fortnite_id: string, note: string): Pr
 };
 
 // delete a note
-const deleteNote = async (id: ObjectId): Promise<DataResonse<Notes>> => {
+const deleteNote = async (user_id: ObjectId, id: ObjectId): Promise<DataResonse<Notes>> => {
     try {
-        const result = await databaseClient.collection<Notes>("notes").findOneAndDelete({ _id: id });
+        const result = await databaseClient.collection<Notes>("notes").findOneAndDelete({ user_id, _id: id });
         return {
             success: true,
             data: result.value
@@ -56,9 +61,9 @@ const deleteNote = async (id: ObjectId): Promise<DataResonse<Notes>> => {
 };
 
 // update a note
-const updateNote = async (id: ObjectId, note: string): Promise<DataResonse<Notes>> => {
+const updateNote = async (id: ObjectId, text: string): Promise<DataResonse<Notes>> => {
     try {
-        const result = await databaseClient.collection<Notes>("notes").findOneAndUpdate({ _id: id }, { $set: { note: note } });
+        const result = await databaseClient.collection<Notes>("notes").findOneAndUpdate({ _id: id }, { $set: { text } });
         return {
             success: true,
             data: result.value

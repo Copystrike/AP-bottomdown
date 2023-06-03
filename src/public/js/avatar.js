@@ -28,7 +28,6 @@ function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
 }
 
 function modelClose() {
-  console.log("model gesloten");
 }
 
 async function favoriteAvatar(fortniteCharacterId) {
