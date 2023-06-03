@@ -1,10 +1,8 @@
-import { WithId } from "mongodb";
-
 export interface User {
     id: string,
     username: string,
-    email: string,
     hashedPasword: string,
+    token: string,
 }
 
 export interface Favorite {

@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <script defer src="./js/login.js"></script>
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
+    <header>
+      <img src="/assets/logo.png" alt="Fortnite Logo" />
+    </header>
+    <div class="form-container">
+      <form class="login-form">
+        <h1>Login</h1>
+        <p>You have to be logged in before selecting a game...</p>
+        <p>Don't have an account yet? You can create an account for free <a href="/register">here</a></p>
 
-<head>
-  <%- include('../partials/head.ejs') %>
-  <script defer src="./js/login.js"></script>
-  <link rel="stylesheet" href="./css/login.css" />
-</head>
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" id="username-login" required />
 
-<body>
-  <header>
-    <img src="/assets/logo.png" alt="Fortnite Logo" />
-  </header>
-  <div class="form-container">
-    <form class="login-form">
-      <h1>Login</h1>
-      <p>You have to be logged in before selecting a game...</p>
-      <p>Don't have an account yet? You can create an account for free <a href="/register">here</a></p>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" id="password-login" required />
 
-      <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username" id="username-login" required />
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" id="password-login" required />
-
-      <button type="submit" class="btn">Login</button>
-    </form>
-  </div>
-  <!-- footer -->
-  <%- include('../partials/foot.ejs') %>
-  <script defer src="./js/functies/modal.js"></script>
-</body>
-
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </div>
+    <!-- footer -->
+    <%- include('../partials/foot.ejs') %>
+    <script defer src="./js/functies/modal.js"></script>
+  </body>
 </html>

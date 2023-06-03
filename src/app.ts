@@ -3,6 +3,7 @@ import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
 import { connectDatabase } from "./database/database";
 import { MongoClient } from "mongodb";
+import bcrypt from "bcrypt";
 
 const fs = require("fs");
 const path = require("path");
