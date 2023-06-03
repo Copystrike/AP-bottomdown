@@ -2,13 +2,9 @@ import express, { Application } from "express";
 import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
 import { connectDatabase } from "./database/database";
-import { MongoClient } from "mongodb";
-import bcrypt from "bcrypt";
 
 const fs = require("fs");
 const path = require("path");
-const uri = "mongodb+srv://webontwikkeling:mourad123@webontwikkeling.c6l5ocp.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri);
 
 const app: Application = express();
 app.use(express.json()); // To parse the incoming requests with JSON payloads

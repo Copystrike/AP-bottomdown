@@ -73,7 +73,7 @@ const getItemsByFavoriteId = async (favorite_id: string): Promise<DataResonse<Fa
 };
 
 // add a new item to a favorite
-const addItem = async (favorite_id: string, fortnite_id: string, user_id: string): Promise<DataResonse<string>> => {
+const addItem = async (user_id: string, favorite_id: string, fortnite_id: string): Promise<DataResonse<string>> => {
   try {
     const result = await databaseClient.collection<Omit<Favorite_Fortnite_mapping, "id">>("Favorite_Fortnite_mapping").insertOne({
       favorite_id,
