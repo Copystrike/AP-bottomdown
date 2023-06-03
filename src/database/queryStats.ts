@@ -20,14 +20,17 @@ const getStatsByUserIdAndFortniteId = async (user_id: ObjectId, fortnite_id: str
 };
 
 // add a new stat
-const addStat = async (user_id: ObjectId, fortnite_id: string, wins: number, losses: number): Promise<DataResonse<string>> => {
+const addStat = async (user_id: ObjectId, fortnite_id: string, wins: number, losses: number): Promise<DataResonse<Stats>> => {
     try {
         const result = await databaseClient.collection<Omit<Stats, '_id'>>("stats").insertOne({
             user_id, fortnite_id, wins, losses,
         });
         return {
             success: true,
-            data: result.insertedId.toJSON()
+            data: {
+                _id: result.insertedId,
+                user_id, fortnite_id, wins, losses,
+            }
         };
     } catch (error) {
         console.error(error);
@@ -39,7 +42,7 @@ const addStat = async (user_id: ObjectId, fortnite_id: string, wins: number, los
 };
 
 // delete a stat
-const deleteStat = async (id: ObjectId): Promise<DataResonse<Stats>> => {
+const deleteStats = async (id: ObjectId): Promise<DataResonse<Stats>> => {
     try {
         const result = await databaseClient.collection<Stats>("stats").findOneAndDelete({ _id: id });
         return {
@@ -56,7 +59,7 @@ const deleteStat = async (id: ObjectId): Promise<DataResonse<Stats>> => {
 };
 
 // update a stat
-const updateStat = async (id: ObjectId, wins: number, losses: number): Promise<DataResonse<Stats>> => {
+const updateStats = async (id: ObjectId, wins: number, losses: number): Promise<DataResonse<Stats>> => {
     try {
         const result = await databaseClient.collection<Stats>("stats").findOneAndUpdate({ _id: id }, { $set: { wins: wins, losses: losses } });
         return {
@@ -71,3 +74,6 @@ const updateStat = async (id: ObjectId, wins: number, losses: number): Promise<D
         };
     }
 };
+
+
+export { getStatsByUserIdAndFortniteId, addStat, deleteStats, updateStats };

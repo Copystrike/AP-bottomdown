@@ -49,36 +49,60 @@ Array.from(avatarSelectContainer.children).forEach((child) => {
 
 
 async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
-
   // Omdat we de ID in de html hebben gezet als 'data-fortnite-character-id' kunnen we deze nu ophalen met de getAttribute functie
   // Nu kunnen we deze ID gebruiken om de juiste data op te halen uit de database of de API
   // Hier is een link van waar we de ID hebben opgeslagen: https://github.com/Copystrike/AP-bottomdown/blob/14d142618e6aacfe8f6f77e3d9272811c5ad2d22/src/pages/avatar.ejs#L21
   const fortniteCharacterId = btn.getAttribute("data-fortnite-character-id");
 
-  const character = await fetchCosmeticsById([fortniteCharacterId]);
+  const character = await fetchCosmeticsById(fortniteCharacterId);
+  const stats = await fetchStatsById(fortniteCharacterId);
+
+  modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
   modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
   modelBody.innerHTML = `
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <p><strong>Description:</strong> ${character.description}</p>
-          <p><strong>Type:</strong> ${character.type.value}</p>
-          <p><strong>Rarity:</strong> ${character.rarity.value}</p>
-          <p><strong>Added:</strong> ${new Date(character.added).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-          <p><strong>Notes</strong></p>
-          <ul id="notes-list"></ul>
-          <form id="add-note-form">
-            <div class="form-group">
-              <label for="note-text">Add a note:</label>
-              <input type="text" class="form-control" id="note-text" required>
-            </div>
-            <button type="submit" class="btn btn-primary mt-2">Add</button>
-          </form>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p><span class="fw-bold">Description:</span> ${character.description}</p>
+      <p><span class="fw-bold">Type:</span> ${character.type.value}</p>
+      <p><span class="fw-bold">Rarity:</span> ${character.rarity.value}</p>
+      <p><span class="fw-bold">Added:</span> ${new Date(character.added).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      <p><span class="fw-bold">Stats:</span></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Kills</th>
+            <th scope="col">Wins</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${stats.kills}</td>
+            <td>${stats.wins}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" scope="col">Note</th>
+          </tr>
+        </thead>
+        <tbody id="notes-list">
+        </tbody>
+      </table>
+      <form id="add-note-form">
+        <div class="mb-3">
+          <label for="note-text" class="form-label fw-bold">Add a note:</label>
+          <input type="text" class="form-control" id="note-text" required>
         </div>
-      </div>
+        <button type="submit" class="btn btn-primary mt-2">Add</button>
+      </form>
     </div>
+  </div>
+</div>
 `;
 
   modelFooter.innerHTML = `
@@ -151,18 +175,20 @@ async function injectAddFormNote(fortniteCharacterId) {
 
 function addNoteToList(note) {
   const list = document.getElementById('notes-list');
-  const listItem = document.createElement('li');
-  listItem.setAttribute('data-id', note._id);
-  listItem.innerHTML = `
-    <span>${note.text}</span>
-    <button class="btn btn-danger btn-sm ml-2">Delete</button>
-  `;
-  listItem.querySelector('button').addEventListener('click', () => {
-    const noteId = listItem.getAttribute('data-id');
-    // Do something with the note ID, such as delete it from the database
-    listItem.remove();
+  const noteRow = document.createElement('tr');
+  noteRow.classList.add('note');
+  noteRow.setAttribute('data-id', note._id);
+  noteRow.insertAdjacentHTML('beforeend', `
+    <td style="max-width: 300px; word-wrap: break-word;">${note.text}</td>
+    <td><button class="btn btn-danger btn-sm">Delete</button></td>
+  `);
+  noteRow.querySelector('button').addEventListener('click', () => {
+    const noteId = noteRow.getAttribute('data-id');
+    removeNoteFromDatabase(noteId).then(() => {
+      noteRow.remove();
+    });
   });
-  list.appendChild(listItem);
+  list.appendChild(noteRow);
 }
 
 async function addNoteToDatabase(note, fortniteCharacterId) {
@@ -188,6 +214,13 @@ async function removeNoteFromDatabase(noteId) {
   const response = await fetch(`/api/notes/${noteId}`, {
     method: 'DELETE'
   });
+  const data = await response.json();
+  return data;
+}
+
+// fetch fortnite character stats /api/stats
+async function fetchStatsById(fortniteCharacterId) {
+  const response = await fetch(`/api/stats/${fortniteCharacterId}`);
   const data = await response.json();
   return data;
 }
