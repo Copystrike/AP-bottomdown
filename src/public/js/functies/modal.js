@@ -34,28 +34,48 @@ function loadModel() {
   const modelBody = document.getElementById("modal-body");
   const modelFooter = document.getElementById("modal-footer");
 
-  const onModelOpen = (button) => {
-    modal.style.display = "block";
+  const onModelOpen = async (button) => {
+
     // Zal 'modelOpen' function uitvoeren, zorg er voor dat deze function bestaat op jouw pagina
     // Deze functie zal ook de data van de button meesturen en model elementen zo dat je deze kan aanpassen
-    modelOpen(button, { modelTitle, modelBody, modelFooter });
+    if (typeof modelOpen === "function") {
+      await modelOpen(button, { modelTitle, modelBody, modelFooter });
+    }
 
     // Als de modal open is zal hij modal close buttons attachen aan de modal.
     const closeModelButtons = document.getElementsByClassName("modal-close"); // Pakt de buttons met de class 'modal-close' op de pagina
     Array.from(closeModelButtons).forEach((button) => (button.onclick = () => onModelClose()));
+
+
+    modal.style.display = "block";
   };
 
   const onModelClose = () => {
     modal.style.display = "none";
-    modelClose(); // Zal deze function uitvoeren, zorg er voor dat deze function bestaat op de jouw pagina
+    if (typeof modelClose === "function") modelClose(); // Zal deze function uitvoeren, zorg er voor dat deze function bestaat op de jouw pagina
   };
 
   let modalButtons = document.getElementsByClassName("modal-button"); // Pakt de buttons met de class 'modal-button' op de pagina
-  Array.from(modalButtons).forEach((button) => (button.onclick = () => onModelOpen(button)));
+  Array.from(modalButtons).forEach((button) => (button.onclick = async () => onModelOpen(button)));
 
   window.onclick = function (event) {
     if (event.target == modal) {
       onModelClose();
     }
   };
+}
+
+function unloadModal() {
+  const modal = document.getElementById("modal");
+  if (modal) {
+    let modalButtons = document.getElementsByClassName("modal-button");
+    Array.from(modalButtons).forEach((button) => (button.onclick = null));
+
+    window.onclick = null;
+  }
+}
+
+function reinjectModal() {
+  unloadModal();
+  loadModel()
 }

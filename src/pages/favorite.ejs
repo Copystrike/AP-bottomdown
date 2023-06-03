@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="nl-BE">
-  <head>
-    <%- include('../partials/head.ejs') %>
+
+<head>
+  <%- include('../partials/head.ejs') %>
     <link rel="stylesheet" href="./css/favorite.css">
-  </head>
-  <body>
-    <header>
-      <img src="/assets/bottomgs.png" alt="Fortnite Logo" />
-      <%- include('../partials/nav.ejs') %>
-    </header>
-    <main>
-      <h1>Jouw favoriete charaters</h1>
-      <div id="favorite-select-container">
-        <% for (let i=1; i < items.length; i++) { %>
-          <div data-fortnite-character-id="<%- items[i].fortnite_id %>" ></div>
-          <% } %>
-      </div>
-    </main>
-    <%- include('../partials/foot.ejs') %>
     <script defer src="./js/favoriete.js"></script>
-  </body>
+    <script defer src="./js/functies/modal.js"></script>
+</head>
+
+<body>
+  <header>
+    <img src="/assets/bottomgs.png" alt="Fortnite Logo" />
+    <%- include('../partials/nav.ejs') %>
+  </header>
+  <main>
+    <h1>Jouw favoriete charaters</h1>
+    <div id="favorite-select-container">
+      <% for (let i=1; i < items.length; i++) { %>
+        <div data-fortnite-character-id="<%- items[i].fortnite_id %>"></div>
+        <% } %>
+    </div>
+  </main>
+  <div id="modal"></div>
+  <%- include('../partials/foot.ejs') %>
+</body>
+
 </html>

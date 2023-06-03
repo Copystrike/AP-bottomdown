@@ -40,12 +40,12 @@ const addFavorite = async (user_id: ObjectId, fortnite_id: string): Promise<Data
 };
 
 // delete a favorite
-const deleteFavorite = async (id: ObjectId): Promise<DataResonse<Favorite>> => {
+const deleteFavorite = async (user_id: ObjectId, fortnite_id: string): Promise<DataResonse<string>> => {
   try {
-    const result = await databaseClient.collection<Favorite>("favorites").findOneAndDelete({ _id: id });
+    const result = await databaseClient.collection<Favorite>("favorites").findOneAndDelete({ user_id, fortnite_id });
     return {
       success: true,
-      data: result.value,
+      data: result.value?._id.toJSON(),
     };
   } catch (error) {
     console.error(error);
@@ -53,7 +53,7 @@ const deleteFavorite = async (id: ObjectId): Promise<DataResonse<Favorite>> => {
       success: false,
       error: "Failed to delete favorite",
     };
-  }
+  };
 };
 
 // get items of a favorite
