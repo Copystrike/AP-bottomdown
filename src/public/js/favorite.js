@@ -56,8 +56,8 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
 
   const character = await fetchCosmeticsById(fortniteCharacterId);
   const stats = await fetchStatsById(fortniteCharacterId);
+  const notes = await fetchNotesById(fortniteCharacterId);
 
-  modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
   modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
@@ -114,6 +114,10 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
 
 
   injectAddFormNote(fortniteCharacterId);
+
+  notes.forEach((note) => {
+    addNoteToList(note);
+  });
 }
 
 function addWin(fortniteCharacterId) {
@@ -163,14 +167,6 @@ async function injectAddFormNote(fortniteCharacterId) {
       });
     }
   });
-
-  fetch(`/api/notes/${fortniteCharacterId}`)
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((note) => {
-        addNoteToList(note);
-      });
-    });
 }
 
 function addNoteToList(note) {
@@ -224,3 +220,10 @@ async function fetchStatsById(fortniteCharacterId) {
   const data = await response.json();
   return data;
 }
+
+async function fetchNotesById(fortniteCharacterId) {
+  const response = await fetch(`/api/notes/${fortniteCharacterId}`);
+  const data = await response.json();
+  return data;
+}
+
