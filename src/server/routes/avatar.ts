@@ -8,21 +8,18 @@ const router = express.Router();
 axios.get<FortniteResponse>(FORTNITE_API_URL).then((axiosResponse) => {
   router.get("/", async (req: any, res: any) => {
     const response = axiosResponse.data.data.items;
-
-    const outfitItems = response.filter((item) => item.type.value === "outfit");
+    const outfitItems = response.filter((item) => item.type.value == "outfit" && item.images);
 
     // randomItems
     const randomItems: any[] = [];
     let unsuccessfulAttempts = 0;
+
     while (randomItems.length < 10 && unsuccessfulAttempts < 3) {
       const randomItemIndex = randomConstraint(0, outfitItems.length - 1);
       const item = outfitItems[randomItemIndex];
       if (!randomItems.includes(item)) {
         randomItems.push(item);
-        unsuccessfulAttempts = 0;
-      } else {
-        unsuccessfulAttempts++;
-      }
+      } else unsuccessfulAttempts++;
     }
 
     try {
