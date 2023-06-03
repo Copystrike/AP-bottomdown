@@ -14,7 +14,6 @@ function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   const fortniteCharacterId = btn.getAttribute("data-fortnite-character-id");
 
   modelTitle.innerHTML = `Hey`;
-  // headerFooter.innerHTML = "Footer";
 
   modelBody.innerHTML = `
     <p>Character ID: ${fortniteCharacterId}</p>
@@ -25,9 +24,6 @@ function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
   `;
 
-}
-
-function modelClose() {
 }
 
 async function favoriteAvatar(fortniteCharacterId) {

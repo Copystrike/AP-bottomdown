@@ -3,9 +3,9 @@ import { DataResonse, Notes, Stats } from "../types/database";
 import { databaseClient } from "./database";
 
 // get stats by user id and fortnite id
-const getStatsByUserIdAndFortniteId = async (user_id: ObjectId, fortnite_id: string): Promise<DataResonse<Stats[]>> => {
+const getStatsByUserIdAndFortniteId = async (user_id: ObjectId, fortnite_id: string): Promise<DataResonse<Stats>> => {
     try {
-        const result = await databaseClient.collection<Stats>("stats").find({ user_id: user_id, fortnite_id: fortnite_id }).toArray();
+        const result = await databaseClient.collection<Stats>("stats").findOne({ user_id, fortnite_id });
         return {
             success: true,
             data: result
@@ -64,7 +64,11 @@ const updateStats = async (id: ObjectId, wins: number, losses: number): Promise<
         const result = await databaseClient.collection<Stats>("stats").findOneAndUpdate({ _id: id }, { $set: { wins: wins, losses: losses } });
         return {
             success: true,
-            data: result.value
+            data: {
+                ...result.value,
+                wins: wins,
+                losses: losses
+            } as Stats // Use `as Stats` to cast the updated object to the `Stats` type
         };
     } catch (error) {
         console.error(error);

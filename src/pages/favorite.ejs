@@ -4,8 +4,11 @@
 <head>
   <%- include('../partials/head.ejs') %>
     <link rel="stylesheet" href="./css/favorite.css">
-    <script defer src="./js/favorite.js"></script>
+    <script defer src="./js/fetch/fetchCosmetic.js"></script>
+    <script defer src="./js/functies/popup.js"></script>
     <script defer src="./js/functies/modal.js"></script>
+
+    <script defer src="./js/favorite.js"></script>
 </head>
 
 <body>
@@ -19,6 +22,11 @@
       <% for (let i=1; i < items.length; i++) { %>
         <div data-fortnite-character-id="<%- items[i].fortnite_id %>"></div>
         <% } %>
+
+          <% if (items.length===1) { %>
+            <p class="text-light">Je hebt nog geen favorieten gekozen.</p>
+            <% } %>
+
     </div>
   </main>
   <div id="modal"></div>

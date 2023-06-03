@@ -9,17 +9,15 @@ export interface User {
 export interface Favorite {
     _id: ObjectId,
     user_id: ObjectId,
-    
     fortnite_id: string,
 }
 
-// We willen meerdere favorieten kunnen toevoegen aan een fortnite_id
-export interface Favorite_Fortnite_mapping {
+export interface LinkedItem {
     _id: ObjectId,
     user_id: ObjectId,
-    favorite_id: ObjectId,
-
     fortnite_id: string,
+    item_id: string,
+    slot: number
 }
 
 export interface BlackList {

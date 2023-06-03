@@ -21,6 +21,9 @@ async function generateCards(ids) {
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="${cosmetic.images.icon}" alt="${cosmetic.name}" />
         <div class="card-body">
+          <h5 class="card-title text-center text-light">${cosmetic.name}</h5>
+        </div>
+        <div class="card-footer">
           <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#myModal" data-fortnite-character-id="${cosmetic.id}">
             Meer Info
           </button>
@@ -54,94 +57,120 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   // Hier is een link van waar we de ID hebben opgeslagen: https://github.com/Copystrike/AP-bottomdown/blob/14d142618e6aacfe8f6f77e3d9272811c5ad2d22/src/pages/avatar.ejs#L21
   const fortniteCharacterId = btn.getAttribute("data-fortnite-character-id");
 
+
   const character = await fetchCosmeticsById(fortniteCharacterId);
   const stats = await fetchStatsById(fortniteCharacterId);
   const notes = await fetchNotesById(fortniteCharacterId);
-
-
   modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
+
+  const defaultPickaxe = "http://127.0.0.1:3000/assets/question-mark.jpg";
   modelBody.innerHTML = `
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <p><span class="fw-bold">Description:</span> ${character.description}</p>
-      <p><span class="fw-bold">Type:</span> ${character.type.value}</p>
-      <p><span class="fw-bold">Rarity:</span> ${character.rarity.value}</p>
-      <p><span class="fw-bold">Added:</span> ${new Date(character.added).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-      <p><span class="fw-bold">Stats:</span></p>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Kills</th>
-            <th scope="col">Wins</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>${stats.kills}</td>
-            <td>${stats.wins}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="table">
-        <thead>
-          <tr>
-            <th colspan="2" scope="col">Note</th>
-          </tr>
-        </thead>
-        <tbody id="notes-list">
-        </tbody>
-      </table>
-      <form id="add-note-form">
-        <div class="mb-3">
-          <label for="note-text" class="form-label fw-bold">Add a note:</label>
-          <input type="text" class="form-control" id="note-text" required>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p><span class="fw-bold">Description:</span> ${character.description}</p>
+        <p><span class="fw-bold">Rarity:</span> ${character.rarity.value}</p>
+        <p><span class="fw-bold">Added:</span> ${new Date(character.added).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p><span class="fw-bold">Stats:</span></p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Wins</th>
+              <th scope="col">losses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="character-wins">${stats.wins || 0}</td>
+              <td id="character-losses">${stats.losses || 0}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2" scope="col">Note</th>
+            </tr>
+          </thead>
+          <tbody id="notes-list">
+          </tbody>
+        </table>
+        <form id="add-note-form">
+          <div class="mb-3">
+            <label for="note-text" class="form-label fw-bold">Add a note:</label>
+            <input type="text" class="form-control" id="note-text" required>
+          </div>
+          <button type="submit" class="btn btn-primary mt-2">Add</button>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <p class="fw-bold">Gekoppelde items</p>
+        <div id="gekoppelde-item" class="d-flex justify-content-evenly">
+          <img data-slot="1" src="${defaultPickaxe}" alt="Image 1" height="150">
+          <img data-slot="2" src="${defaultPickaxe}" alt="Image 2" height="150">
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Add</button>
-      </form>
+      </div>
     </div>
   </div>
-</div>
-`;
+  `;
 
   modelFooter.innerHTML = `
   <button type="button" onclick="addWin('${character.id}')" class="btn btn-success">WIN</button>
   <button type="button" onclick="addLoss('${character.id}')" class="btn btn-danger">LOSE</button>
-  <button type="button" onclick="removeFavorite('${character.id}')" class="btn btn-danger">verwijder</button>
+  <button type="button" onclick="removeFavorite('${character.id}')" class="btn btn-danger">unfavoriet</button>
   <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
   `;
 
 
   injectAddFormNote(fortniteCharacterId);
+  injectGekoppeldeItems(fortniteCharacterId);
 
   notes.forEach((note) => {
     addNoteToList(note);
   });
 }
 
+function blacklistHandle() {
+  location.reload();
+}
+
 function addWin(fortniteCharacterId) {
-  fetch("/api/win", {
+  fetch("/api/stats", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       fortniteCharacterId,
+      stat: 'wins',
+      type: 'increment',
     }),
-  });
+  }).then((response) => response.json())
+    .then((data) => {
+      if (data.isBlacklisted) blacklistHandle();
+      document.getElementById('character-wins').innerText = data.data.wins;
+    });
 }
 
 function addLoss(fortniteCharacterId) {
-  fetch("/api/loss", {
+  fetch("/api/stats", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       fortniteCharacterId,
+      stat: 'loss',
+      type: 'increment',
     }),
-  });
+  }).then((response) => response.json())
+    .then((data) => {
+      if (data.isBlacklisted) blacklistHandle();
+      document.getElementById('character-losses').innerText = data.data.losses;
+    });
 }
 
 function removeFavorite(fortniteCharacterId) {
@@ -227,3 +256,29 @@ async function fetchNotesById(fortniteCharacterId) {
   return data;
 }
 
+async function injectGekoppeldeItems(fortniteCharacterId) {
+  const pickaxes = await fetchPickaxes(); // pickaxes.data[0].images.icon
+  const gekoppeldeItemContainer = document.getElementById('gekoppelde-item');
+  gekoppeldeItemContainer.addEventListener('click', createPopup.bind(null, 'Items', pickaxes, fortniteCharacterId));
+}
+
+async function popupImageClicked(element, pickaxe, fortniteCharacterId) {
+  const slot = element.getAttribute('data-slot');
+  console.log(pickaxe.id);
+
+  fetch(`/api/linkedItem`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      fortniteCharacterId: fortniteCharacterId,
+      item_id: pickaxe.id,
+      slot: slot,
+    }),
+  }).then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+
+}
