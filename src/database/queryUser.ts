@@ -3,10 +3,11 @@ import { databaseClient } from "./database";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { TOKEN_KEY } from "../constants";
+import { ObjectId } from "mongodb";
 
-const getUserById = async (id: string): Promise<DataResonse<User>> => {
+const getUserById = async (id: ObjectId): Promise<DataResonse<User>> => {
   try {
-    const result = await databaseClient.collection<User>("users").findOne({ id: id });
+    const result = await databaseClient.collection<User>("users").findOne({ _id: id });
     return {
       success: true,
       data: result,
@@ -36,26 +37,25 @@ const getUserByUsername = async (username: string): Promise<DataResonse<User>> =
   }
 };
 
-const addUser = async (user: Omit<User, "hashedPasword" | "id" | "token">, password: string): Promise<DataResonse<string>> => {
+const addUser = async (user: Omit<User, "hashedPasword" | "_id" | "token">, password: string): Promise<DataResonse<string>> => {
   user.username = user.username.toLocaleLowerCase();
   try {
     const token = jwt.sign({ username: user.username }, TOKEN_KEY, {
       expiresIn: "2h",
     });
     const hashedPasword = await bcrypt.hash(password, 10);
-    const generatedUser: Omit<User, "id"> = {
+    const generatedUser: Omit<User, "_id"> = {
       ...user,
-      token,
       hashedPasword,
     };
 
-    await databaseClient.collection<Omit<User, "id">>("users").insertOne(generatedUser);
+    await databaseClient.collection<Omit<User, "_id">>("users").insertOne(generatedUser);
 
     return {
       success: true,
       data: token,
     };
-    
+
   } catch (error) {
     console.error(error);
     return {
@@ -65,7 +65,7 @@ const addUser = async (user: Omit<User, "hashedPasword" | "id" | "token">, passw
   }
 };
 
-const updateUser = async (id: string, user: Omit<User, "id">): Promise<DataResonse<string>> => {
+const updateUser = async (id: string, user: Omit<User, "_id">): Promise<DataResonse<string>> => {
   user.username = user.username.toLocaleLowerCase();
   try {
     await databaseClient.collection<User>("users").updateOne({ id }, { $set: user });

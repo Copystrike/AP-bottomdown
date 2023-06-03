@@ -9,17 +9,14 @@ window.onload = function () {
       <div class="modal" id="modal">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
+            <div id="modal-header">
               <h5 class="modal-title">Loading...</h5>
               <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
+            <div id="modal-body">
               <p>loading...</p>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
-              <button onclick="setAvatar('<%= items[i].images.icon %>')">Set <%= items[i].name %> as Avatar</button>
-            </div>
+            <div id="modal-footer" />
           </div>
         </div>
       </div>
@@ -29,16 +26,11 @@ window.onload = function () {
   }
   
   function loadModel() {
-    var modalButtons = document.getElementsByClassName("modal-button");
+    const modal = document.getElementById("modal");
 
-
-    var modal = document.getElementById("modal");
-    var closeModal = document.getElementsByClassName("close")[0];
-    var closeModal2 = document.getElementsByClassName("modal-close")[0];
-  
-    const modelTitle = document.getElementsByClassName("modal-header")[0];
-    const modelBody = document.getElementsByClassName("modal-body")[0];
-    const modelFooter = document.getElementsByClassName("modal-footer")[0];
+    const modelTitle = document.getElementById("modal-header");
+    const modelBody = document.getElementById("modal-body");
+    const modelFooter = document.getElementById("modal-footer");
   
     const onModelOpen = (button) => {
       modal.style.display = "block";
@@ -52,11 +44,12 @@ window.onload = function () {
       modelClose(); // Zal deze function uitvoeren, zorg er voor dat deze function bestaat op de jouw pagina
     };
   
+    let modalButtons = document.getElementsByClassName("modal-button"); // Pakt de buttons met de class 'modal-button' op de pagina
     Array.from(modalButtons).forEach((button) => (button.onclick = () => onModelOpen(button)));
   
-    closeModal.onclick = () => onModelClose();
-    closeModal2.onclick = () => onModelClose();
-  
+    const closeModelButtons = document.getElementsByClassName("modal-close"); // Pakt de buttons met de class 'modal-close' op de pagina
+    Array.from(closeModelButtons).forEach((button) => (button.onclick = () => onModelClose()));
+      
     window.onclick = function (event) {
       if (event.target == modal) {
         onModelClose();

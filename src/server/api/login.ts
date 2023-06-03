@@ -29,13 +29,10 @@ router.post("/", async (req: any, res: any) => {
     const validPassword = await bcrypt.compare(password, databaseUserResponse.data.hashedPasword);
 
     if (databaseUserResponse.data && validPassword) {
-      const token = jwt.sign({ username }, TOKEN_KEY, {
-        expiresIn: "2h",
-      });
+      const databaseUser = databaseUserResponse.data;
 
-      await updateUser(databaseUserResponse.data.id, {
-        ...databaseUserResponse.data,
-        token,
+      const token = jwt.sign({ _id: databaseUser._id, username: databaseUser.username }, TOKEN_KEY, {
+        expiresIn: "2h",
       });
 
       res.cookie("session", token);

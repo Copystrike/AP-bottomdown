@@ -1,8 +1,9 @@
+import { ObjectId } from "mongodb";
 import { DataResonse, Favorite, Favorite_Fortnite_mapping } from "../types/database";
 import { databaseClient } from "./database";
 
 // get all favorites by user id
-const getFavoritesByUserId = async (user_id: string): Promise<DataResonse<Favorite[]>> => {
+const getFavoritesByUserId = async (user_id: ObjectId): Promise<DataResonse<Favorite[]>> => {
   try {
     const result = await databaseClient.collection<Favorite>("favorites").find({ user_id: user_id }).toArray();
     return {
@@ -19,9 +20,9 @@ const getFavoritesByUserId = async (user_id: string): Promise<DataResonse<Favori
 };
 
 // add a new favorite
-const addFavorite = async (user_id: string, fortnite_id: string): Promise<DataResonse<string>> => {
+const addFavorite = async (user_id: ObjectId, fortnite_id: string): Promise<DataResonse<string>> => {
   try {
-    const result = await databaseClient.collection<Omit<Favorite, "id">>("favorites").insertOne({
+    const result = await databaseClient.collection<Omit<Favorite, "_id">>("favorites").insertOne({
       user_id,
       fortnite_id,
     });
@@ -39,9 +40,9 @@ const addFavorite = async (user_id: string, fortnite_id: string): Promise<DataRe
 };
 
 // delete a favorite
-const deleteFavorite = async (id: string): Promise<DataResonse<Favorite>> => {
+const deleteFavorite = async (id: ObjectId): Promise<DataResonse<Favorite>> => {
   try {
-    const result = await databaseClient.collection<Favorite>("favorites").findOneAndDelete({ id: id });
+    const result = await databaseClient.collection<Favorite>("favorites").findOneAndDelete({ _id: id });
     return {
       success: true,
       data: result.value,
@@ -56,7 +57,7 @@ const deleteFavorite = async (id: string): Promise<DataResonse<Favorite>> => {
 };
 
 // get items of a favorite
-const getItemsByFavoriteId = async (favorite_id: string): Promise<DataResonse<Favorite_Fortnite_mapping[]>> => {
+const getItemsByFavoriteId = async (favorite_id: ObjectId): Promise<DataResonse<Favorite_Fortnite_mapping[]>> => {
   try {
     const result = await databaseClient.collection<Favorite_Fortnite_mapping>("Favorite_Fortnite_mapping").find({ favorite_id: favorite_id }).toArray();
     return {
@@ -73,9 +74,9 @@ const getItemsByFavoriteId = async (favorite_id: string): Promise<DataResonse<Fa
 };
 
 // add a new item to a favorite
-const addItem = async (user_id: string, favorite_id: string, fortnite_id: string): Promise<DataResonse<string>> => {
+const addItem = async (user_id: ObjectId, favorite_id: ObjectId, fortnite_id: string): Promise<DataResonse<string>> => {
   try {
-    const result = await databaseClient.collection<Omit<Favorite_Fortnite_mapping, "id">>("Favorite_Fortnite_mapping").insertOne({
+    const result = await databaseClient.collection<Omit<Favorite_Fortnite_mapping, "_id">>("Favorite_Fortnite_mapping").insertOne({
       favorite_id,
       fortnite_id,
       user_id,
@@ -94,9 +95,9 @@ const addItem = async (user_id: string, favorite_id: string, fortnite_id: string
 };
 
 // delete an item from a favorite
-const deleteItem = async (id: string): Promise<DataResonse<Favorite_Fortnite_mapping>> => {
+const deleteItem = async (id: ObjectId): Promise<DataResonse<Favorite_Fortnite_mapping>> => {
   try {
-    const result = await databaseClient.collection<Favorite_Fortnite_mapping>("Favorite_Fortnite_mapping").findOneAndDelete({ id: id });
+    const result = await databaseClient.collection<Favorite_Fortnite_mapping>("Favorite_Fortnite_mapping").findOneAndDelete({ _id: id });
     return {
       success: true,
       data: result.value,

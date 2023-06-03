@@ -1,10 +1,11 @@
+import { ObjectId } from "mongodb";
 import { DataResonse, Notes } from "../types/database";
 import { databaseClient } from "./database";
 
 // get all notes by user id and fortnite id
-const getNotesByUserIdAndFortniteId = async (user_id: string, fortnite_id: string): Promise<DataResonse<Notes[]>> => {
+const getNotesByUserIdAndFortniteId = async (user_id: ObjectId, fortnite_id: string): Promise<DataResonse<Notes[]>> => {
     try {
-        const result = await databaseClient.collection<Notes>("notes").find({ user_id: user_id, fortnite_id: fortnite_id }).toArray();
+        const result = await databaseClient.collection<Notes>("notes").find({ user_id, fortnite_id }).toArray();
         return {
             success: true,
             data: result
@@ -19,9 +20,9 @@ const getNotesByUserIdAndFortniteId = async (user_id: string, fortnite_id: strin
 };
 
 // add a new note
-const addNote = async (user_id: string, fortnite_id: string, note: string): Promise<DataResonse<string>> => {
+const addNote = async (user_id: ObjectId, fortnite_id: string, note: string): Promise<DataResonse<string>> => {
     try {
-        const result = await databaseClient.collection<Omit<Notes, 'id'>>("notes").insertOne({
+        const result = await databaseClient.collection<Omit<Notes, '_id'>>("notes").insertOne({
             user_id, fortnite_id, note,
         });
         return {
@@ -38,9 +39,9 @@ const addNote = async (user_id: string, fortnite_id: string, note: string): Prom
 };
 
 // delete a note
-const deleteNote = async (id: string): Promise<DataResonse<Notes>> => {
+const deleteNote = async (id: ObjectId): Promise<DataResonse<Notes>> => {
     try {
-        const result = await databaseClient.collection<Notes>("notes").findOneAndDelete({ id: id });
+        const result = await databaseClient.collection<Notes>("notes").findOneAndDelete({ _id: id });
         return {
             success: true,
             data: result.value
@@ -55,9 +56,9 @@ const deleteNote = async (id: string): Promise<DataResonse<Notes>> => {
 };
 
 // update a note
-const updateNote = async (id: string, note: string): Promise<DataResonse<Notes>> => {
+const updateNote = async (id: ObjectId, note: string): Promise<DataResonse<Notes>> => {
     try {
-        const result = await databaseClient.collection<Notes>("notes").findOneAndUpdate({ id: id }, { $set: { note: note } });
+        const result = await databaseClient.collection<Notes>("notes").findOneAndUpdate({ _id: id }, { $set: { note: note } });
         return {
             success: true,
             data: result.value

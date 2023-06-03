@@ -1,8 +1,9 @@
+import { ObjectId } from "mongodb";
 import { DataResonse, Notes, Stats } from "../types/database";
 import { databaseClient } from "./database";
 
 // get stats by user id and fortnite id
-const getStatsByUserIdAndFortniteId = async (user_id: string, fortnite_id: string): Promise<DataResonse<Stats[]>> => {
+const getStatsByUserIdAndFortniteId = async (user_id: ObjectId, fortnite_id: string): Promise<DataResonse<Stats[]>> => {
     try {
         const result = await databaseClient.collection<Stats>("stats").find({ user_id: user_id, fortnite_id: fortnite_id }).toArray();
         return {
@@ -19,9 +20,9 @@ const getStatsByUserIdAndFortniteId = async (user_id: string, fortnite_id: strin
 };
 
 // add a new stat
-const addStat = async (user_id: string, fortnite_id: string, wins: number, losses: number): Promise<DataResonse<string>> => {
+const addStat = async (user_id: ObjectId, fortnite_id: string, wins: number, losses: number): Promise<DataResonse<string>> => {
     try {
-        const result = await databaseClient.collection<Omit<Stats, 'id'>>("stats").insertOne({
+        const result = await databaseClient.collection<Omit<Stats, '_id'>>("stats").insertOne({
             user_id, fortnite_id, wins, losses,
         });
         return {
@@ -38,9 +39,9 @@ const addStat = async (user_id: string, fortnite_id: string, wins: number, losse
 };
 
 // delete a stat
-const deleteStat = async (id: string): Promise<DataResonse<Stats>> => {
+const deleteStat = async (id: ObjectId): Promise<DataResonse<Stats>> => {
     try {
-        const result = await databaseClient.collection<Stats>("stats").findOneAndDelete({ id: id });
+        const result = await databaseClient.collection<Stats>("stats").findOneAndDelete({ _id: id });
         return {
             success: true,
             data: result.value
@@ -55,9 +56,9 @@ const deleteStat = async (id: string): Promise<DataResonse<Stats>> => {
 };
 
 // update a stat
-const updateStat = async (id: string, wins: number, losses: number): Promise<DataResonse<Stats>> => {
+const updateStat = async (id: ObjectId, wins: number, losses: number): Promise<DataResonse<Stats>> => {
     try {
-        const result = await databaseClient.collection<Stats>("stats").findOneAndUpdate({ id: id }, { $set: { wins: wins, losses: losses } });
+        const result = await databaseClient.collection<Stats>("stats").findOneAndUpdate({ _id: id }, { $set: { wins: wins, losses: losses } });
         return {
             success: true,
             data: result.value
