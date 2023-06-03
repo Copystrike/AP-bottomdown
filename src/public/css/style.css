@@ -1,11 +1,18 @@
 /* Alle css dat alleen op ALLE paginas gaat */
 
+body, footer {
+  background: linear-gradient(90deg, rgba(13, 112, 255, 1) 0%, rgba(33, 41, 151, 1) 100%);
+}
+
+figcaption {
+  color: #fff;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   /* height: 100%; */
-
 }
 
 header {
@@ -58,12 +65,12 @@ footer {
   height: 50px;
   text-align: center;
   background-color: #ddd;
-  
+
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  
+
 
 
 }
@@ -76,7 +83,7 @@ footer {
 
 .nogamepage {
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: center;
   gap: 100px;
   padding: 50px;
@@ -113,16 +120,16 @@ button {
   font-weight: bold;
 }
 
-#avatar-container > img {
+#avatar-container>img {
   border-radius: 50%;
   height: 60px;
   margin-left: 10px;
 }
 
 
- /* NIEUWE CSS */
+/* NIEUWE CSS */
 
- /* Button used to open the contact form - fixed at the bottom of the page */
+/* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
   background-color: #555;
   color: white;
@@ -138,8 +145,8 @@ button {
 
 /* The popup form - hidden by default */
 .form-popup {
-  display:block;
-  position:fixed;
+  display: block;
+  position: fixed;
   top: 0;
   right: 15px;
   border: 3px solid #f1f1f1;
@@ -154,7 +161,8 @@ button {
 }
 
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type=text],
+.form-container input[type=password] {
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -163,7 +171,8 @@ button {
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type=text]:focus,
+.form-container input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }

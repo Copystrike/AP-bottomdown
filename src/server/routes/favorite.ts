@@ -26,7 +26,7 @@ axios.get<FortniteResponse>(FORTNITE_API_URL).then((axiosResponse) => {
     }
 
     try {
-      res.render("avatar", { items: randomItems });
+      res.render("favorite", { items: randomItems });
     } catch (error) {
       console.error(error);
       res.send("Error!");

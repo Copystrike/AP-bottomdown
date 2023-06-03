@@ -47,7 +47,7 @@ dirs.forEach((dir) => {
 // - Routes
 // -- Snelle manier om alle statische pagina's te renderen
 // -- als de pagina naam zelde is als de file naam en heeft geen backend data nodig dan kan je hem hier inzetten
-const staticPages = ["index", "login", "nogame", "favoriete", "blacklist", "register"];
+const staticPages = ["index", "login", "nogame", "blacklist", "register"];
 staticPages.forEach((page) => staticPage(page));
 
 

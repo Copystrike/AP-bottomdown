@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="./css/favoriete.css">
+  </head>
+  <body>
+    <header>
+      <img src="/assets/bottomgs.png" alt="Fortnite Logo" />
+      <%- include('../partials/nav.ejs') %>
+    </header>
+    <main>
+      <h1>Welcome this is your avatar</h1>
+      <div class="avatar-select-container">
+        <% for (let i=1; i < 5; i++) { %>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="<%= items[i].images.icon%>" alt="<%= items[i].name %>" />
+            <div class="card-body">
+              <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#myModal"
+                data-fortnite-character-id="<%= items[i].id %>">
+                Meer Info
+              </button>
+            </div>
+          </div>
+          <% } %>
+      </div>
+    </main>
+    <%- include('../partials/foot.ejs') %>
+    <script defer src="./js/favoriete.js"></script>
+  </body>
+</html>
