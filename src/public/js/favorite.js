@@ -259,6 +259,17 @@ async function fetchNotesById(fortniteCharacterId) {
 async function injectGekoppeldeItems(fortniteCharacterId) {
   const pickaxes = await fetchPickaxes(); // pickaxes.data[0].images.icon
   const gekoppeldeItemContainer = document.getElementById('gekoppelde-item');
+
+  await fetch(`/api/linkedItem/${fortniteCharacterId}`)
+    .then(response => response.json())
+    .then(data => {
+      data.data.forEach(item => {
+        const slot = item.slot;
+        const image = pickaxes.data.find(pickaxe => pickaxe.id === item.item_id).images.icon;
+        gekoppeldeItemContainer.querySelector(`[data-slot="${slot}"]`).setAttribute('src', image);
+      });
+    });
+
   gekoppeldeItemContainer.addEventListener('click', createPopup.bind(null, 'Items', pickaxes, fortniteCharacterId));
 }
 
@@ -276,9 +287,5 @@ async function popupImageClicked(element, pickaxe, fortniteCharacterId) {
       item_id: pickaxe.id,
       slot: slot,
     }),
-  }).then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
-
+  });
 }
