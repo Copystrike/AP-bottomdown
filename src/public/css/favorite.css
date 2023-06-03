@@ -1,21 +1,20 @@
 /* Alle css dat alleen op de avatar pagina gaat */
-.avatar-select-container {
+#favorite-select-container {
   display: flex;
   justify-content: center;
-  place-content: space-evenly;
   flex-wrap: wrap;
   padding-top: 3%;
 }
 
 .card {
-  background: rgb(39,48,124);
   background: linear-gradient(90deg, rgba(39,48,124,1) 100%, rgba(0,11,104,1) 100%);
+  margin: 5px 20px;
 }
 
-.avatar-select-item > img:hover  {
+.favorite-select-item>img:hover {
   transform: scale(1.1);
 }
 
-.avatar-select-item > button {
+.favorite-select-item > button {
   align-items: center;
 }

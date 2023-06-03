@@ -8,11 +8,14 @@ figcaption {
   color: #fff;
 }
 
+html {
+  height: 100%;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  /* height: 100%; */
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -56,23 +59,18 @@ h1 {
   flex-direction: column;
 }
 
+main {
+  flex: 1;
+}
+
 footer {
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 10px;
   height: 50px;
   text-align: center;
   background-color: #ddd;
-
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-
-
-
 }
 
 .content {
@@ -97,13 +95,14 @@ footer {
   align-items: center;
   flex-wrap: nowrap;
   overflow-x: scroll;
-  white-space: nowrap;
   height: 400px;
+  overflow: hidden;
 }
 
 .games img {
-  width: 250px;
-  height: 250px;
+  height: 300px;
+  margin: 0 50px;
+  background-color: #fff;
   object-fit: cover;
   border: 2px solid #0072c6;
   transition: transform 0.2s ease-in-out;
@@ -124,64 +123,4 @@ button {
   border-radius: 50%;
   height: 60px;
   margin-left: 10px;
-}
-
-
-/* NIEUWE CSS */
-
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  background-color: #555;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
-}
-
-/* The popup form - hidden by default */
-.form-popup {
-  display: block;
-  position: fixed;
-  top: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-}
-
-/* Full-width input fields */
-.form-container input[type=text],
-.form-container input[type=password] {
-  width: 90%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus,
-.form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
 }

@@ -1,42 +1,25 @@
-import axios from "axios";
-import { FORTNITE_API_URL } from "../../constants";
-import { FortniteResponse } from "../../types/fortnite";
+import { getProfile } from "../utils";
+import { getFavoritesByUserId } from "../../database/queryFavorites";
+import { Request, Response } from "express";
 
 const express = require("express");
 const router = express.Router();
 
-axios.get<FortniteResponse>(FORTNITE_API_URL).then((axiosResponse) => {
-  router.get("/", async (req: any, res: any) => {
-    const response = axiosResponse.data.data.items;
+router.get("/", async (req: Request, res: Response) => {
+  const profile = getProfile(req)!; // Unauthorized errors worden behandeld in de middleware
 
-    const outfitItems = response.filter((item) => item.type.value === "outfit");
+  const { error, data } = await getFavoritesByUserId(profile?._id);
 
-    // randomItems
-    const randomItems: any[] = [];
-    let unsuccessfulAttempts = 0;
-    while (randomItems.length < 10 && unsuccessfulAttempts < 3) {
-      const randomItemIndex = randomConstraint(0, outfitItems.length - 1);
-      const item = outfitItems[randomItemIndex];
-      if (!randomItems.includes(item)) {
-        randomItems.push(item);
-        unsuccessfulAttempts = 0;
-      } else {
-        unsuccessfulAttempts++;
-      }
-    }
+  if (error) {
+    return res.redirect("/error");
+  }
 
-    try {
-      res.render("favorite", { items: randomItems });
-    } catch (error) {
-      console.error(error);
-      res.send("Error!");
-    }
-  });
+  try {
+    res.render("favorite", { items: data });
+  } catch (error) {
+    console.error(error);
+    res.send("Error!");
+  }
 });
-
-// random constaint function
-const randomConstraint = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
 
 module.exports = router;

@@ -7,8 +7,10 @@ const router = express.Router();
 
 axios.get<FortniteResponse>(FORTNITE_API_URL).then((axiosResponse) => {
   router.get("/", async (req: any, res: any) => {
-    const response = axiosResponse.data.data.items;
-    const outfitItems = response.filter((item) => item.type.value == "outfit" && item.images);
+    const response = axiosResponse.data.data;
+
+    // Id cannot contain "npc" and type must be "outfit"
+    const outfitItems = response.filter((item) => item.type.value == "outfit" && item.images && !item.id.toLocaleLowerCase().includes("npc"));
 
     // randomItems
     const randomItems: any[] = [];

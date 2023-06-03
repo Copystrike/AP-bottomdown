@@ -2,7 +2,7 @@ export const NODE_ENV = process.env.NODE_ENV || ("development" as "development" 
 
 export const IS_DEV = NODE_ENV === "development";
 
-export const FORTNITE_API_URL = "https://fortnite-api.com/v2/cosmetics/br/new";
+export const FORTNITE_API_URL = "https://fortnite-api.com/v2/cosmetics/br/search/all/?addedSince=1675425582";
 
 export const TOKEN_KEY = "gNsoSwZqLqhk7sS3muVrkQIUzKUpPRZk";
 
