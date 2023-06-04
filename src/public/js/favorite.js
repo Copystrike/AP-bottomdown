@@ -64,7 +64,7 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
 
-  const defaultPickaxe = "http://127.0.0.1:3000/assets/question-mark.jpg";
+  const defaultPickaxe = "/assets/question-mark.jpg";
   modelBody.innerHTML = `
   <div class="container">
     <div class="row">
