@@ -16,7 +16,7 @@ function injectModal() {
               </button>
             </div>
             <div id="modal-body" class="modal-body">
-              <p>loading...</p>
+              <p>aan het laden...</p>
             </div>
             <div id="modal-footer" class="modal-footer" />
           </div>

@@ -13,12 +13,12 @@ async function getCosmeticById(cosmeticId) {
       };
       return responseData;
     } else {
-      throw new Error("Failed to retrieve cosmetic data");
+      throw new Error("Mislukt om cosmetische data op te halen.");
     }
   } catch (error) {
     const responseData = {
       success: false,
-      error: "An error occurred while fetching the cosmetic data",
+      error: "Error bij het ophalen van cosmetische data",
     };
     throw responseData;
   }
@@ -39,12 +39,12 @@ async function fetchPickaxes() {
       };
       return responseData;
     } else {
-      throw new Error("Failed to retrieve pickaxes");
+      throw new Error("Mislukt om pickaxen op te halen!");
     }
   } catch (error) {
     const responseData = {
       success: false,
-      error: "An error occurred while fetching the pickaxes",
+      error: "Error bij het ophalen van pickaxen.",
     };
     throw responseData;
   }
