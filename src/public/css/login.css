@@ -18,6 +18,7 @@
   padding: 10px;
   background-color: white;
   margin: auto;
+  border-radius: 25px;
 
   display:flex;
   justify-content: center;
@@ -30,7 +31,8 @@
   padding: 15px;
   margin: 5px 0 22px 0;
   border: none;
-  background: #f1f1f1;
+  border-radius: 25px;
+  background: #dbdbdb;
 }
 
 /* When the inputs get focus, do something */
@@ -42,7 +44,7 @@
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #04aa6d;
+  background-color: #2d46fd;
   color: white;
   padding: 16px 20px;
   border: none;

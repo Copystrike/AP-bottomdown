@@ -2,7 +2,7 @@
 
 body,
 footer {
-  background: linear-gradient(90deg, rgba(13, 112, 255, 1) 0%, rgba(33, 41, 151, 1) 100%);
+  background: linear-gradient(to right, #0575e6, #021b79);
 }
 
 figcaption {
@@ -27,6 +27,7 @@ header {
   color: #fff;
   padding: 10px;
   min-height: 100px;
+  margin-bottom: 1%;
 }
 
 nav ul {
