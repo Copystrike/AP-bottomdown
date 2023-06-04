@@ -115,7 +115,11 @@ async function updateBlacklistReason(fortniteCharacterId) {
 async function deleteBlacklist(fortniteCharacterId) {
   await fetch(`/api/blacklist/${fortniteCharacterId}`, {
     method: "DELETE",
-  }).then(location.reload());
+  }).then((response) => response.json()).then((data) => {
+    if (data.success) {
+      window.location.reload();
+    }
+  });
 }
 
 // fetch fortnite character stats /api/stats
