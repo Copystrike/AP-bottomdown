@@ -37,7 +37,7 @@ router.post("/", async (req: express.Request, res: express.Response) => {
 
     return res.cookie("session", userData.data).status(200).json({ message: "Successfully registered" });
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 });
 

@@ -6,7 +6,7 @@ async function loginFormHandler(event) {
   const passwordConfirmed = document.querySelector("#password-confirm-register").value.trim();
 
   if (password !== passwordConfirmed) {
-    alert("Passwords do not match");
+    showErrorMessage("Wachtwoorden komen niet overeen");
     return;
   }
 
@@ -23,9 +23,16 @@ async function loginFormHandler(event) {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      alert(response.statusText);
+      const errorMessage = await response.text();
+      showErrorMessage(errorMessage);
     }
   }
 }
 
 document.querySelector(".register-form").addEventListener("submit", loginFormHandler);
+
+function showErrorMessage(message) {
+  const errorMessage = document.querySelector("#error-message");
+  errorMessage.innerHTML = message;
+  errorMessage.style.display = "block";
+}

@@ -287,7 +287,6 @@ async function injectGekoppeldeItems(fortniteCharacterId) {
 
 async function popupImageClicked(element, pickaxe, fortniteCharacterId) {
   const slot = element.getAttribute("data-slot");
-  console.log(pickaxe.id);
 
   fetch(`/api/linkedItem`, {
     method: "POST",

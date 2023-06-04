@@ -17,9 +17,16 @@ async function loginFormHandler(event) {
     if (response.ok) {
       document.location.replace("/");
     } else {
-      alert(response.statusText);
+      const errorMessage = await response.json();
+      showErrorMessage(errorMessage.error);
     }
   }
 }
 
 document.querySelector(".login-form").addEventListener("submit", loginFormHandler);
+
+function showErrorMessage(message) {
+  const errorMessage = document.querySelector("#error-message");
+  errorMessage.innerHTML = message;
+  errorMessage.style.display = "block";
+}

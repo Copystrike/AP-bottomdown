@@ -20,29 +20,29 @@ router.post("/", async (req: any, res: any) => {
       return res.status(400).send("All input is required");
     }
 
-    const databaseUserResponse = await getUserByUsername(username);
+    const { error, data } = await getUserByUsername(username);
 
-    if (databaseUserResponse.error || !databaseUserResponse.data) {
-      return res.status(500).json({ message: "An error occured", error: databaseUserResponse.error });
+    if (error || !data) {
+      return res.status(500).json({ error: "foutief wachtwoord of gebruikersnaam" });
     }
 
-    const validPassword = await bcrypt.compare(password, databaseUserResponse.data.hashedPasword);
+    const validPassword = await bcrypt.compare(password, data.hashedPasword);
 
-    if (databaseUserResponse.data && validPassword) {
-      const databaseUser = databaseUserResponse.data;
+    if (data && validPassword) {
+      const databaseUser = data;
 
       const token = jwt.sign({ _id: databaseUser._id, username: databaseUser.username }, TOKEN_KEY, {
         expiresIn: "2h",
       });
 
       res.cookie("session", token);
-      res.status(200).json(databaseUserResponse);
+      res.status(200).json(data);
       return;
     }
 
-    res.status(400).send("Invalid Credentials");
+    res.status(400).json({ error: "foutief wachtwoord of gebruikersnaam" });
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 });
 
