@@ -5,57 +5,51 @@ import { addFavorite, deleteFavorite, getFavoritesByUserId } from "../../databas
 
 const router = express.Router();
 
-
 router.post("/", async (req: Request, res: Response) => {
-    const profile = getProfile(req);
+  const profile = getProfile(req);
 
-    if (!profile) {
-        res.status(401).json({ message: "Unauthorized" });
-        return;
-    }
+  if (!profile) {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
 
-    const userFavorites = await getFavoritesByUserId(profile?._id);
+  const userFavorites = await getFavoritesByUserId(profile?._id);
 
-    if (userFavorites.error) {
-        return res.status(500).json({ message: "Internal server error" });
-    }
+  if (userFavorites.error) {
+    return res.status(500).json({ message: "Internal server error" });
+  }
 
-    // Check if already added
-    if (userFavorites.data?.find((favorite) => favorite.fortnite_id === req.body.fortniteCharacterId)) {
-        return res.status(400).json({ message: "Already added" });
-    }
+  // Check if already added
+  if (userFavorites.data?.find((favorite) => favorite.fortnite_id === req.body.fortniteCharacterId)) {
+    return res.status(400).json({ message: "Already added" });
+  }
 
-    const favo = await addFavorite(profile._id, req.body.fortniteCharacterId)
-    res.json(favo);
+  const favo = await addFavorite(profile._id, req.body.fortniteCharacterId);
+  res.json(favo);
 });
 
 router.delete("/:id", async (req: Request, res: Response) => {
-    const profile = getProfile(req);
+  const profile = getProfile(req);
 
-    if (!profile) {
-        res.status(401).json({ message: "Unauthorized" });
-        return;
-    }
+  if (!profile) {
+    res.status(401).json({ message: "Unauthorized" });
+    return;
+  }
 
-    const favo = await deleteFavorite(profile._id, req.params.id)
-    res.json(favo);
+  const favo = await deleteFavorite(profile._id, req.params.id);
+  res.json(favo);
 });
-
-
-
 
 router.get("/", async (req: Request, res: Response) => {
-    const profile = getProfile(req);
+  const profile = getProfile(req);
 
-    if (!profile) {
-        return res.status(401).json({ message: "Unauthorized" });
-    }
+  if (!profile) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
-    const favo = getFavoritesByUserId(profile?._id);
+  const favo = getFavoritesByUserId(profile?._id);
 
-    res.json(favo);
+  res.json(favo);
 });
-
-
 
 module.exports = router;

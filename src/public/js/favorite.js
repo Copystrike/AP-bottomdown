@@ -1,5 +1,5 @@
 async function fetchCosmeticsByIds(ids) {
-  const url = `https://fortnite-api.com/v2/cosmetics/br/search/ids?id=${ids.join('&id=')}`;
+  const url = `https://fortnite-api.com/v2/cosmetics/br/search/ids?id=${ids.join("&id=")}`;
   const response = await fetch(url);
   const data = await response.json();
   return data;
@@ -13,7 +13,7 @@ async function fetchCosmeticsById(id) {
 }
 
 async function generateCards(ids) {
-  let html = '';
+  let html = "";
   const data = await fetchCosmeticsByIds(ids);
   for (let i = 0; i < data.data.length; i++) {
     const cosmetic = data.data[i];
@@ -34,22 +34,21 @@ async function generateCards(ids) {
   return html;
 }
 
-const avatarSelectContainer = document.getElementById('favorite-select-container');
+const avatarSelectContainer = document.getElementById("favorite-select-container");
 const favoriteIds = [];
 
 Array.from(avatarSelectContainer.children).forEach((child) => {
-  const fortniteCharacterId = child.getAttribute('data-fortnite-character-id');
+  const fortniteCharacterId = child.getAttribute("data-fortnite-character-id");
   favoriteIds.push(fortniteCharacterId);
 });
 
 (async () => {
   const avatarCards = await generateCards(favoriteIds);
-  const avatarContainer = document.getElementById('favorite-select-container');
+  const avatarContainer = document.getElementById("favorite-select-container");
   avatarContainer.innerHTML = avatarCards;
 
   reinjectModal();
 })();
-
 
 async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   // Omdat we de ID in de html hebben gezet als 'data-fortnite-character-id' kunnen we deze nu ophalen met de getAttribute functie
@@ -57,12 +56,10 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   // Hier is een link van waar we de ID hebben opgeslagen: https://github.com/Copystrike/AP-bottomdown/blob/14d142618e6aacfe8f6f77e3d9272811c5ad2d22/src/pages/avatar.ejs#L21
   const fortniteCharacterId = btn.getAttribute("data-fortnite-character-id");
 
-
   const character = await fetchCosmeticsById(fortniteCharacterId);
   const stats = await fetchStatsById(fortniteCharacterId);
   const notes = await fetchNotesById(fortniteCharacterId);
   modelTitle.innerHTML = `<h2>${character.name}</h2>`;
-
 
   const defaultPickaxe = "/assets/question-mark.jpg";
   modelBody.innerHTML = `
@@ -71,7 +68,7 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
       <div class="col-md-12">
         <p><span class="fw-bold">Description:</span> ${character.description}</p>
         <p><span class="fw-bold">Rarity:</span> ${character.rarity.value}</p>
-        <p><span class="fw-bold">Added:</span> ${new Date(character.added).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p><span class="fw-bold">Added:</span> ${new Date(character.added).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
         <p><span class="fw-bold">Stats:</span></p>
         <table class="table">
           <thead>
@@ -124,7 +121,6 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
   `;
 
-
   injectAddFormNote(fortniteCharacterId);
   injectGekoppeldeItems(fortniteCharacterId);
 
@@ -145,13 +141,14 @@ function addWin(fortniteCharacterId) {
     },
     body: JSON.stringify({
       fortniteCharacterId,
-      stat: 'wins',
-      type: 'increment',
+      stat: "wins",
+      type: "increment",
     }),
-  }).then((response) => response.json())
+  })
+    .then((response) => response.json())
     .then((data) => {
       if (data.isBlacklisted) blacklistHandle();
-      document.getElementById('character-wins').innerText = data.data.wins;
+      document.getElementById("character-wins").innerText = data.data.wins;
     });
 }
 
@@ -163,13 +160,14 @@ function addLoss(fortniteCharacterId) {
     },
     body: JSON.stringify({
       fortniteCharacterId,
-      stat: 'loss',
-      type: 'increment',
+      stat: "loss",
+      type: "increment",
     }),
-  }).then((response) => response.json())
+  })
+    .then((response) => response.json())
     .then((data) => {
       if (data.isBlacklisted) blacklistHandle();
-      document.getElementById('character-losses').innerText = data.data.losses;
+      document.getElementById("character-losses").innerText = data.data.losses;
     });
 }
 
@@ -181,34 +179,36 @@ function removeFavorite(fortniteCharacterId) {
   });
 }
 
-
 async function injectAddFormNote(fortniteCharacterId) {
-  const form = document.getElementById('add-note-form');
-  const input = document.getElementById('note-text');
+  const form = document.getElementById("add-note-form");
+  const input = document.getElementById("note-text");
 
-  form.addEventListener('submit', event => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     const text = input.value.trim();
     if (text) {
-      addNoteToDatabase({ text }, fortniteCharacterId).then(note => {
+      addNoteToDatabase({ text }, fortniteCharacterId).then((note) => {
         addNoteToList(note.data);
-        input.value = '';
+        input.value = "";
       });
     }
   });
 }
 
 function addNoteToList(note) {
-  const list = document.getElementById('notes-list');
-  const noteRow = document.createElement('tr');
-  noteRow.classList.add('note');
-  noteRow.setAttribute('data-id', note._id);
-  noteRow.insertAdjacentHTML('beforeend', `
+  const list = document.getElementById("notes-list");
+  const noteRow = document.createElement("tr");
+  noteRow.classList.add("note");
+  noteRow.setAttribute("data-id", note._id);
+  noteRow.insertAdjacentHTML(
+    "beforeend",
+    `
     <td style="max-width: 300px; word-wrap: break-word;">${note.text}</td>
     <td><button class="btn btn-danger btn-sm">Delete</button></td>
-  `);
-  noteRow.querySelector('button').addEventListener('click', () => {
-    const noteId = noteRow.getAttribute('data-id');
+  `
+  );
+  noteRow.querySelector("button").addEventListener("click", () => {
+    const noteId = noteRow.getAttribute("data-id");
     removeNoteFromDatabase(noteId).then(() => {
       noteRow.remove();
     });
@@ -220,14 +220,14 @@ async function addNoteToDatabase(note, fortniteCharacterId) {
   // Code to add the note to the database
   // For example, using fetch to make a POST request to a server
   const response = await fetch(`/api/notes`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       fortniteCharacterId,
-      text: note.text
-    })
+      text: note.text,
+    }),
   });
   const data = await response.json();
   return data;
@@ -237,7 +237,7 @@ async function removeNoteFromDatabase(noteId) {
   // Code to remove the note from the database
   // For example, using fetch to make a DELETE request to a server
   const response = await fetch(`/api/notes/${noteId}`, {
-    method: 'DELETE'
+    method: "DELETE",
   });
   const data = await response.json();
   return data;
@@ -258,23 +258,23 @@ async function fetchNotesById(fortniteCharacterId) {
 
 async function injectGekoppeldeItems(fortniteCharacterId) {
   const pickaxes = await fetchPickaxes(); // pickaxes.data[0].images.icon
-  const gekoppeldeItemContainer = document.getElementById('gekoppelde-item');
+  const gekoppeldeItemContainer = document.getElementById("gekoppelde-item");
 
   await fetch(`/api/linkedItem/${fortniteCharacterId}`)
-    .then(response => response.json())
-    .then(data => {
-      data.data.forEach(item => {
+    .then((response) => response.json())
+    .then((data) => {
+      data.data.forEach((item) => {
         const slot = item.slot;
-        const image = pickaxes.data.find(pickaxe => pickaxe.id === item.item_id).images.icon;
-        gekoppeldeItemContainer.querySelector(`[data-slot="${slot}"]`).setAttribute('src', image);
+        const image = pickaxes.data.find((pickaxe) => pickaxe.id === item.item_id).images.icon;
+        gekoppeldeItemContainer.querySelector(`[data-slot="${slot}"]`).setAttribute("src", image);
       });
     });
 
-  gekoppeldeItemContainer.addEventListener('click', createPopup.bind(null, 'Items', pickaxes, fortniteCharacterId));
+  gekoppeldeItemContainer.addEventListener("click", createPopup.bind(null, "Items", pickaxes, fortniteCharacterId));
 }
 
 async function popupImageClicked(element, pickaxe, fortniteCharacterId) {
-  const slot = element.getAttribute('data-slot');
+  const slot = element.getAttribute("data-slot");
   console.log(pickaxe.id);
 
   fetch(`/api/linkedItem`, {

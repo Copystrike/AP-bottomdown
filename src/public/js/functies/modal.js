@@ -35,7 +35,6 @@ function loadModel() {
   const modelFooter = document.getElementById("modal-footer");
 
   const onModelOpen = async (button) => {
-
     // Zal 'modelOpen' function uitvoeren, zorg er voor dat deze function bestaat op jouw pagina
     // Deze functie zal ook de data van de button meesturen en model elementen zo dat je deze kan aanpassen
     if (typeof modelOpen === "function") {
@@ -45,7 +44,6 @@ function loadModel() {
     // Als de modal open is zal hij modal close buttons attachen aan de modal.
     const closeModelButtons = document.getElementsByClassName("modal-close"); // Pakt de buttons met de class 'modal-close' op de pagina
     Array.from(closeModelButtons).forEach((button) => (button.onclick = () => onModelClose()));
-
 
     modal.style.display = "block";
   };
@@ -77,5 +75,5 @@ function unloadModal() {
 
 function reinjectModal() {
   unloadModal();
-  loadModel()
+  loadModel();
 }

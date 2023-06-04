@@ -7,31 +7,26 @@ const databaseClient = client.db("bottomg");
 
 // connect to database
 const connectDatabase = async () => {
-    try {
-        await client.connect();
-        console.log("CONNECTED TO DATABASE");
-        process.on("SIGINT", async () => {
-            await closeDatabase();
-        });
-    } catch (error) {
-        console.error(error);
-    }
+  try {
+    await client.connect();
+    console.log("CONNECTED TO DATABASE");
+    process.on("SIGINT", async () => {
+      await closeDatabase();
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // close database
 const closeDatabase = async () => {
-    try {
-        await client.close();
-        console.log("DISCONNECTED FROM DATABASE");
-    } catch (error) {
-        console.error(error);
-    }
-    process.exit(0);
+  try {
+    await client.close();
+    console.log("DISCONNECTED FROM DATABASE");
+  } catch (error) {
+    console.error(error);
+  }
+  process.exit(0);
 };
 
-
-export {
-    connectDatabase,
-    closeDatabase,
-    databaseClient,
-}
+export { connectDatabase, closeDatabase, databaseClient };

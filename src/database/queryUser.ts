@@ -55,7 +55,6 @@ const addUser = async (user: Omit<User, "hashedPasword" | "_id" | "token">, pass
       success: true,
       data: token,
     };
-
   } catch (error) {
     console.error(error);
     return {

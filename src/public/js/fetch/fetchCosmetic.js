@@ -9,24 +9,23 @@ async function getCosmeticById(cosmeticId) {
       const cosmetic = data.data;
       const responseData = {
         success: true,
-        data: cosmetic
+        data: cosmetic,
       };
       return responseData;
     } else {
-      throw new Error('Failed to retrieve cosmetic data');
+      throw new Error("Failed to retrieve cosmetic data");
     }
   } catch (error) {
     const responseData = {
       success: false,
-      error: 'An error occurred while fetching the cosmetic data'
+      error: "An error occurred while fetching the cosmetic data",
     };
     throw responseData;
   }
 }
 
-
 async function fetchPickaxes() {
-  const url = 'https://fortnite-api.com/v2/cosmetics/br/search/all?type=pickaxe&addedSince=1683129904';
+  const url = "https://fortnite-api.com/v2/cosmetics/br/search/all?type=pickaxe&addedSince=1683129904";
 
   try {
     const response = await fetch(url);
@@ -36,16 +35,16 @@ async function fetchPickaxes() {
       const pickaxes = data.data;
       const responseData = {
         success: true,
-        data: pickaxes
+        data: pickaxes,
       };
       return responseData;
     } else {
-      throw new Error('Failed to retrieve pickaxes');
+      throw new Error("Failed to retrieve pickaxes");
     }
   } catch (error) {
     const responseData = {
       success: false,
-      error: 'An error occurred while fetching the pickaxes'
+      error: "An error occurred while fetching the pickaxes",
     };
     throw responseData;
   }

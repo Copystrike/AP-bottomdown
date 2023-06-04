@@ -1,7 +1,7 @@
 export type FortniteResponse = {
   status: number;
   data: Datum[];
-}
+};
 
 export type Datum = {
   id: string;
@@ -27,27 +27,27 @@ export type Datum = {
   shopHistory: Date[] | null;
   unlockRequirements?: string;
   builtInEmoteIDS?: string[];
-}
+};
 
 export type Images = {
   smallIcon: string;
   icon: string;
   featured: null | string;
   other: Other | null;
-}
+};
 
 export type Other = {
   background?: string;
   coverart?: string;
   decal?: string;
-}
+};
 
 export type Introduction = {
   chapter: string;
   season: string;
   text: Text;
   backendValue: number;
-}
+};
 
 export type Text = "Introduced in Chapter 4, Season 2." | "Introduced in Chapter 4, Season 1." | "Introduced in Chapter 3, Season 3." | "Introduced in Chapter 3, Season 4.";
 
@@ -55,7 +55,7 @@ export type Rarity = {
   value: PurpleValue;
   displayValue: DisplayValueEnum;
   backendValue: RarityBackendValue;
-}
+};
 
 export type RarityBackendValue = "EFortRarity::Epic" | "EFortRarity::Rare" | "EFortRarity::Uncommon" | "EFortRarity::Legendary" | "EFortRarity::Common" | "AthenaBackpack" | "AthenaCharacter" | "AthenaSkyDiveContrail" | "AthenaDance" | "AthenaEmoji" | "AthenaGlider" | "AthenaLoadingScreen" | "AthenaMusicPack" | "AthenaPickaxe" | "AthenaSpray" | "AthenaItemWrap";
 
@@ -68,7 +68,7 @@ export type Series = {
   image: null | string;
   colors: Color[];
   backendValue: SeriesBackendValue;
-}
+};
 
 export type SeriesBackendValue = "ColumbusSeries" | "MarvelSeries" | "PlatformSeries" | "CreatorCollabSeries";
 
@@ -78,13 +78,13 @@ export type Set = {
   value: string;
   text: string;
   backendValue: string;
-}
+};
 
 export type Variant = {
   channel: Channel;
   type: string;
   options: Option[];
-}
+};
 
 export type Channel = "Material" | "Progressive" | "Parts" | "Emissive" | "Particle" | "Mesh" | "Slot" | "JerseyColor" | "Pattern";
 
@@ -93,4 +93,4 @@ export type Option = {
   name: string;
   image: string;
   unlockRequirements?: string;
-}
+};

@@ -53,7 +53,7 @@ const deleteFavorite = async (user_id: ObjectId, fortnite_id: string): Promise<D
       success: false,
       error: "Failed to delete favorite",
     };
-  };
+  }
 };
 
 export { getFavoritesByUserId, addFavorite, deleteFavorite };

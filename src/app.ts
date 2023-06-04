@@ -50,7 +50,6 @@ dirs.forEach((dir) => {
 const staticPages = ["index", "login", "nogame", "blacklist", "register"];
 staticPages.forEach((page) => staticPage(page));
 
-
 // Als je naar / gaat, render dan index.ejs
 app.get("/", async (req, res) => {
   res.render("index");
@@ -61,4 +60,3 @@ app.listen(PORT_NUMBER, () => {
   connectDatabase();
   console.log(`SERVER RUNNING ON http://127.0.0.1:${PORT_NUMBER}/`);
 });
-

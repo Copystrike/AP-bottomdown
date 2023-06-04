@@ -29,4 +29,3 @@ async function loginFormHandler(event) {
 }
 
 document.querySelector(".register-form").addEventListener("submit", loginFormHandler);
-
