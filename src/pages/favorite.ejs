@@ -19,14 +19,13 @@
   <main>
     <h1>Jouw favoriete charaters</h1>
     <div id="favorite-select-container">
-      <% for (let i=0; i < items.length; i++) { %>
-        <div data-fortnite-character-id="<%- items[i].fortnite_id %>"></div>
+      <% if (items.length <= 0) { %>
+        <p class="text-light">Je hebt nog geen favorieten gekozen.</p>
+      <% } else { %>
+        <% for (let i=0; i < items.length; i++) { %>
+          <div data-fortnite-character-id="<%- items[i].fortnite_id %>"></div>
         <% } %>
-
-          <% if (items.length===1) { %>
-            <p class="text-light">Je hebt nog geen favorieten gekozen.</p>
-            <% } %>
-
+      <% } %>
     </div>
   </main>
   <div id="modal"></div>
