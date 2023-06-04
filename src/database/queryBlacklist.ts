@@ -5,7 +5,7 @@ import { databaseClient } from "./database";
 // get all blacklists by user id
 const getBlacklistsByUserId = async (user_id: ObjectId): Promise<DataResonse<BlackList[]>> => {
   try {
-    const result = await databaseClient.collection<BlackList>("blacklists").find({ user_id: user_id }).toArray();
+    const result = await databaseClient.collection<BlackList>("blacklists").find({ user_id }).toArray();
     return {
       success: true,
       data: result,
@@ -41,9 +41,9 @@ const addBlacklist = async (user_id: ObjectId, fortnite_id: string, reason: stri
 };
 
 // delete a blacklist
-const deleteBlacklist = async (id: ObjectId): Promise<DataResonse<BlackList>> => {
+const deleteBlacklist = async (user_id: ObjectId, fortnite_id: string): Promise<DataResonse<BlackList>> => {
   try {
-    const result = await databaseClient.collection<BlackList>("blacklists").findOneAndDelete({ _id: id });
+    const result = await databaseClient.collection<BlackList>("blacklists").findOneAndDelete({ user_id, fortnite_id });
     return {
       success: true,
       data: result.value,
@@ -58,9 +58,9 @@ const deleteBlacklist = async (id: ObjectId): Promise<DataResonse<BlackList>> =>
 };
 
 // update a blacklist
-const updateBlacklist = async (id: ObjectId, reason: string): Promise<DataResonse<BlackList>> => {
+const updateBlacklist = async (user_id: ObjectId, fortnite_id: string, reason: string): Promise<DataResonse<BlackList>> => {
   try {
-    const result = await databaseClient.collection<BlackList>("blacklists").findOneAndUpdate({ id: id }, { $set: { reason: reason } });
+    const result = await databaseClient.collection<BlackList>("blacklists").findOneAndUpdate({ user_id, fortnite_id }, { $set: { reason: reason } });
     return {
       success: true,
       data: result.value,

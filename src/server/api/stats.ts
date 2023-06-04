@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { getProfile } from "../utils";
 import { addStat, getStatsByUserIdAndFortniteId, updateStats } from "../../database/queryStats";
 import { Stats } from "../../types/database";
-import { addBlacklist } from "../../database/queryBlacklist";
+import { addBlacklist, getBlacklistsByUserId } from "../../database/queryBlacklist";
 import { deleteFavorite } from "../../database/queryFavorites";
 
 const router = express.Router();
@@ -29,6 +29,16 @@ router.post("/", async (req: Request, res: Response) => {
     return res.status(404).json({ message: "Stats not found" });
   }
 
+  await getBlacklistsByUserId(profile._id).then((blacklists) => {
+    if (blacklists.data) {
+      const blacklist = blacklists.data.find((blacklist) => blacklist.fortnite_id === fortniteCharacterId);
+      if (blacklist) {
+        console.log("blacklisted");
+        return res.status(403).json({ ...stats, isBlacklisted });
+      }
+    }
+  });
+
   let result;
 
   switch (stat) {
@@ -52,7 +62,7 @@ router.post("/", async (req: Request, res: Response) => {
     await deleteFavorite(profile._id, fortniteCharacterId);
   }
 
-  res.json({ ...result, isBlacklisted });
+  return res.json({ ...result, isBlacklisted });
 });
 
 router.get("/:fortniteCharacterId", async (req: Request, res: Response) => {
@@ -86,5 +96,5 @@ router.get("/:fortniteCharacterId", async (req: Request, res: Response) => {
   res.json(userNotes.data);
 });
 
-router.delete("/:id", async (req: Request, res: Response) => {});
+router.delete("/:id", async (req: Request, res: Response) => { });
 module.exports = router;

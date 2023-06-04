@@ -10,7 +10,7 @@ const router = express.Router();
 router.use((request: Request, response: Response, next: NextFunction) => {
   const hasValidSession = verifyToken(request, response);
 
-  const alwaysAllowed = request.path.startsWith("/api");
+  const alwaysAllowed = request.path.startsWith("/api") || request.path.startsWith("/favicon.ico");
   const unAuthenicatedOnly = request.path === "/login" || request.path === "/register";
 
   console.log(`[${new Date().toISOString()}] ${request.method} ${request.path}`); // Logt de request

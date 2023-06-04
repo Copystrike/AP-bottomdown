@@ -133,7 +133,18 @@ function blacklistHandle() {
   location.reload();
 }
 
+function delayButtons() {
+  document.querySelectorAll("#modal-footer button:not(.modal-close)").forEach((button) => {
+    button.disabled = true; // disable the button
+    setTimeout(() => {
+      button.disabled = false; // re-enable the button after 2 seconds
+    }, 500);
+  });
+}
+
+
 function addWin(fortniteCharacterId) {
+  delayButtons();
   fetch("/api/stats", {
     method: "POST",
     headers: {
@@ -153,6 +164,7 @@ function addWin(fortniteCharacterId) {
 }
 
 function addLoss(fortniteCharacterId) {
+  delayButtons();
   fetch("/api/stats", {
     method: "POST",
     headers: {
