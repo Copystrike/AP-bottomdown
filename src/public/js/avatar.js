@@ -12,15 +12,15 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <p><span class="fw-bold">Description:</span> ${character.description}</p>
-        <p><span class="fw-bold">Rarity:</span> ${character.rarity.value}</p>
-        <p><span class="fw-bold">Added:</span> ${new Date(character.added).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
-        <p><span class="fw-bold">Stats:</span></p>
+        <p><span class="fw-bold">Beschrijving:</span> ${character.description}</p>
+        <p><span class="fw-bold">Zeldzaamheid:</span> ${character.rarity.value}</p>
+        <p><span class="fw-bold">Aangemaakt:</span> ${new Date(character.added).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
+        <p><span class="fw-bold">Statistieken:</span></p>
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Wins</th>
-              <th scope="col">losses</th>
+              <th scope="col">Gewonnen</th>
+              <th scope="col">Verloren</th>
             </tr>
           </thead>
           <tbody>
@@ -30,16 +30,16 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
             </tr>
           </tbody>
         </table>
-        <p><span class="fw-bold">Blacklist Reason:</span></p>
+        <p><span class="fw-bold">Blacklist reden:</span></p>
         <input type="text" id="blacklist-reason" value="">
       </div>
   </div>
   `;
   modelFooter.innerHTML = `
-  <button type="button" onclick="favoriteAvatar('${fortniteCharacterId}')" class="btn btn-warning">Favorite</button>
+  <button type="button" onclick="favoriteAvatar('${fortniteCharacterId}')" class="btn btn-warning">Favoriet</button>
   <button type="button" onclick="updateBlacklistReason('${fortniteCharacterId}')" class="btn btn-danger">Blacklist</button>
-  <button type="button" onclick="updateAvatar('${fortniteCharacterId}')" class="btn btn-primary">Set Avatar</button>
-  <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
+  <button type="button" onclick="updateAvatar('${fortniteCharacterId}')" class="btn btn-primary">Zet als Avatar</button>
+  <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Sluit</button>
   `;
 
 

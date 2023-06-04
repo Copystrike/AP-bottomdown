@@ -66,15 +66,15 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <p><span class="fw-bold">Description:</span> ${character.description}</p>
-        <p><span class="fw-bold">Rarity:</span> ${character.rarity.value}</p>
-        <p><span class="fw-bold">Added:</span> ${new Date(character.added).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
-        <p><span class="fw-bold">Stats:</span></p>
+        <p><span class="fw-bold">Beschrijving:</span> ${character.description}</p>
+        <p><span class="fw-bold">Zeldzaamheid:</span> ${character.rarity.value}</p>
+        <p><span class="fw-bold">Aangemaakt:</span> ${new Date(character.added).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
+        <p><span class="fw-bold">Statistieken:</span></p>
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Wins</th>
-              <th scope="col">losses</th>
+              <th scope="col">Gewonnen</th>
+              <th scope="col">Verloren</th>
             </tr>
           </thead>
           <tbody>
@@ -95,10 +95,10 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
         </table>
         <form id="add-note-form">
           <div class="mb-3">
-            <label for="note-text" class="form-label fw-bold">Add a note:</label>
+            <label for="note-text" class="form-label fw-bold">Voeg een notitie toe:</label>
             <input type="text" class="form-control" id="note-text" required>
           </div>
-          <button type="submit" class="btn btn-primary mt-2">Add</button>
+          <button type="submit" class="btn btn-primary mt-2">Toevoegen</button>
         </form>
       </div>
     </div>
@@ -115,10 +115,10 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   `;
 
   modelFooter.innerHTML = `
-  <button type="button" onclick="addWin('${character.id}')" class="btn btn-success">WIN</button>
-  <button type="button" onclick="addLoss('${character.id}')" class="btn btn-danger">LOSE</button>
-  <button type="button" onclick="removeFavorite('${character.id}')" class="btn btn-danger">unfavoriet</button>
-  <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
+  <button type="button" onclick="addWin('${character.id}')" class="btn btn-success">Win</button>
+  <button type="button" onclick="addLoss('${character.id}')" class="btn btn-danger">Verlies</button>
+  <button type="button" onclick="removeFavorite('${character.id}')" class="btn btn-danger">Verwijderen</button>
+  <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Sluit</button>
   `;
 
   injectAddFormNote(fortniteCharacterId);
