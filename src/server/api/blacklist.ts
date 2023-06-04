@@ -2,9 +2,6 @@ import express from "express";
 import { Request, Response } from "express";
 import { getProfile } from "../utils";
 import { deleteBlacklist, updateBlacklist, getBlacklistsByUserId } from "../../database/queryBlacklist";
-import { ObjectId } from "mongodb";
-
-// Path: src/server/api/blacklist.ts
 
 const router = express.Router();
 
@@ -19,7 +16,6 @@ router.get("/:id", async (req: Request, res: Response) => {
 
     const { error, data } = await getBlacklistsByUserId(profile?._id);
 
-    console.log(data);
 
     if (error || !data) {
         return res.json({ message: "Internal server error" });

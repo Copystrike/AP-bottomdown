@@ -64,12 +64,18 @@ const addUser = async (user: Omit<User, "hashedPasword" | "_id" | "token">, pass
   }
 };
 
-const updateUser = async (id: string, user: Omit<User, "_id">): Promise<DataResonse<string>> => {
-  user.username = user.username.toLocaleLowerCase();
+const updateUser = async (id: ObjectId, user: Partial<Omit<User, "_id">>): Promise<DataResonse<Partial<Omit<User, "_id">>>> => {
   try {
-    await databaseClient.collection<User>("users").updateOne({ id }, { $set: user });
+    await databaseClient.collection<User>("users").findOneAndUpdate({ _id: id }, {
+      $set: {
+        ...user,
+      }
+    });
     return {
       success: true,
+      data: {
+        ...user,
+      }
     };
   } catch (error) {
     console.error(error);

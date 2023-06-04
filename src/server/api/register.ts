@@ -26,6 +26,7 @@ router.post("/", async (req: express.Request, res: express.Response) => {
     const userData = await addUser(
       {
         username,
+        fortnite_id: "",
       },
       password
     );

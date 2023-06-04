@@ -4,6 +4,7 @@ export interface User {
   _id: ObjectId;
   username: string;
   hashedPasword: string;
+  fortnite_id: string;
 }
 
 export interface Favorite {

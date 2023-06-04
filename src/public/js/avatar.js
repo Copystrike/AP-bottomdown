@@ -1,11 +1,3 @@
-function setAvatar(avatarUrl) {
-  const avatar = document.createElement("img");
-  avatar.src = avatarUrl;
-  const avatarContainer = document.getElementById("avatar-container");
-  avatarContainer.innerHTML = "";
-  avatarContainer.appendChild(avatar);
-}
-
 async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   // Omdat we de ID in de html hebben gezet als 'data-fortnite-character-id' kunnen we deze nu ophalen met de getAttribute functie
   // Nu kunnen we deze ID gebruiken om de juiste data op te halen uit de database of de API
@@ -44,14 +36,31 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
   </div>
   `;
   modelFooter.innerHTML = `
-  <button type="button" onclick="favoriteAvatar('${fortniteCharacterId}')" class="btn btn-warning">Favorite Avatar</button>
+  <button type="button" onclick="favoriteAvatar('${fortniteCharacterId}')" class="btn btn-warning">Favorite</button>
   <button type="button" onclick="updateBlacklistReason('${fortniteCharacterId}')" class="btn btn-danger">Blacklist</button>
+  <button type="button" onclick="updateAvatar('${fortniteCharacterId}')" class="btn btn-primary">Set Avatar</button>
   <button type="button" class="btn btn-secondary modal-close" data-dismiss="modal">Close</button>
   `;
 
 
   await injectBlacklistReason(fortniteCharacterId);
 }
+
+async function updateAvatar(fortniteCharacterId) {
+  await fetch("/api/user", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      fortniteCharacterId,
+    }),
+  }).then(setAvatar(fortniteCharacterId))
+}
+
+
+
+
 
 async function favoriteAvatar(fortniteCharacterId) {
   await fetch("/api/favorite", {

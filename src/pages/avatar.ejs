@@ -3,8 +3,8 @@
 
 <head>
   <%- include('../partials/head.ejs') %>
-    <script defer src="./js/fetch/fetchCosmetic.js"></script>
-    <script defer src="./js/functies/modal.js"></script>
+    <script src="./js/fetch/fetchCosmetic.js"></script>
+    <script src="./js/functies/modal.js"></script>
     <script defer src="./js/avatar.js"></script>
     <link rel="stylesheet" href="./css/avatar.css" />
 </head>
@@ -15,24 +15,29 @@
     <%- include('../partials/nav.ejs') %>
   </header>
   <!-- Avatar list -->
-  <div class="avatar-select-container">
-    <% for (let i=0; i < items.length; i++) { %>
-      <div class="card <%= items[i].isFavorite ? 'starred' : '' %> <%= items[i].isBlacklisted ? 'blacklisted' : '' %>" style="width: 18rem;">
-        <img class="card-img-top" src="<%= items[i].images.icon%>" alt="<%= items[i].name %>" />
-        <div class="card-body">
-          <h5 class="card-title text-center text-light">
-            <%= items[i].name %>
-          </h5>
+  <section>
+
+    <h1>Wille keurige avatars</h1>
+    <div class="avatar-select-container">
+      <% for (let i=0; i < items.length; i++) { %>
+        <div class="card <%= items[i].isFavorite ? 'starred' : '' %> <%= items[i].isBlacklisted ? 'blacklisted' : '' %>"
+          style="width: 18rem;">
+          <img class="card-img-top" src="<%= items[i].images.icon%>" alt="<%= items[i].name %>" />
+          <div class="card-body">
+            <h5 class="card-title text-center text-light">
+              <%= items[i].name %>
+            </h5>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#myModal"
+              data-fortnite-character-id="<%= items[i].id %>">
+              Meer Info
+            </button>
+          </div>
         </div>
-        <div class="card-footer">
-          <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#myModal"
-            data-fortnite-character-id="<%= items[i].id %>">
-            Meer Info
-          </button>
-        </div>
-      </div>
-      <% } %>
-  </div>
+        <% } %>
+    </div>
+  </section>
   </div>
   <!-- Modal  -->
   <div id="modal"></div>
