@@ -1,6 +1,7 @@
 /* Alle css dat alleen op ALLE paginas gaat */
 
-body, footer {
+body,
+footer {
   background: linear-gradient(90deg, rgba(13, 112, 255, 1) 0%, rgba(33, 41, 151, 1) 100%);
 }
 
@@ -89,38 +90,14 @@ footer {
 
 }
 
-.games {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  height: 400px;
-  overflow: hidden;
-}
-
-.games img {
-  height: 300px;
-  margin: 0 50px;
-  background-color: #fff;
-  object-fit: cover;
-  border: 2px solid #0072c6;
-  transition: transform 0.2s ease-in-out;
-  border-radius: 10px;
-}
-
-section {
-  justify-content: center;
-}
-
-button {
-  border-radius: 0.5em;
-  padding: 0.25em 0.5em;
-  font-weight: bold;
-}
-
 #avatar-container>img {
   border-radius: 50%;
   height: 60px;
   margin-left: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+  header > img {
+    display: none;
+  }
 }
