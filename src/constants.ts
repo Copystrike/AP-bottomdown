@@ -7,3 +7,5 @@ export const FORTNITE_API_URL = "https://fortnite-api.com/v2/cosmetics/br/search
 export const TOKEN_KEY = "gNsoSwZqLqhk7sS3muVrkQIUzKUpPRZk";
 
 export const FORTNITE_API_KEY = "6af32110-2611-4c2d-bbad-3ff6b722668f";
+
+export const PORT_NUMBER = 3000;

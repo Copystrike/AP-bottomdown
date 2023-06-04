@@ -1,7 +1,7 @@
 import express, { Application } from "express";
-import { PORT_NUMBER } from "./config/debug";
 import cookieParser from "cookie-parser";
 import { connectDatabase } from "./database/database";
+import { PORT_NUMBER } from "./constants";
 
 const fs = require("fs");
 const path = require("path");

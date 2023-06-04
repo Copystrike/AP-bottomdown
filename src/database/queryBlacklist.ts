@@ -60,7 +60,7 @@ const deleteBlacklist = async (user_id: ObjectId, fortnite_id: string): Promise<
 // update a blacklist
 const updateBlacklist = async (user_id: ObjectId, fortnite_id: string, reason: string): Promise<DataResonse<BlackList>> => {
   try {
-    const result = await databaseClient.collection<BlackList>("blacklists").findOneAndUpdate({ user_id, fortnite_id }, { $set: { reason: reason } });
+    const result = await databaseClient.collection<BlackList>("blacklists").findOneAndUpdate({ user_id, fortnite_id }, { $set: { reason: reason } }, { upsert: true });
     return {
       success: true,
       data: result.value,

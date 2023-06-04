@@ -18,3 +18,42 @@
 .avatar-select-item > button {
   align-items: center;
 }
+
+/* <div class="card <%= items[i].isFavorite ? '' : 'starred' %>" style="width: 18rem;">
+<img class="card-img-top" src="<%= items[i].images.icon%>" alt="<%= items[i].name %>" />
+<div class="card-body">
+  <h5 class="card-title text-center text-light"><%= items[i].name %></h5>
+</div>
+<div class="card-footer">
+  <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#myModal"
+    data-fortnite-character-id="<%= items[i].id %>">
+    Meer Info
+  </button>
+</div>
+</div> */
+
+.starred {
+  position: relative;
+}
+
+.starred::before {
+  content: "\2605"; /* Unicode character for star */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 24px;
+  color: gold;
+}
+
+.blacklisted {
+  position: relative;
+}
+
+.blacklisted::before {
+  content: "\1F6AB"; /* Unicode character for no entry sign */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 24px;
+  color: red;
+}

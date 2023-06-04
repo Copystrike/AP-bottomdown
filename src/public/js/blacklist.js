@@ -58,10 +58,8 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
 
   const character = await fetchCosmeticsById(fortniteCharacterId);
   const stats = await fetchStatsById(fortniteCharacterId);
-  const notes = await fetchNotesById(fortniteCharacterId);
   modelTitle.innerHTML = `<h2>${character.name}</h2>`;
 
-  const defaultPickaxe = "/assets/question-mark.jpg";
   modelBody.innerHTML = `
   <div class="container">
     <div class="row">
@@ -85,7 +83,7 @@ async function modelOpen(btn, { modelTitle, modelBody, modelFooter }) {
           </tbody>
         </table>
         <p><span class="fw-bold">Blacklist Reason:</span></p>
-        <input type="text" id="blacklist-reason" value="${notes.blacklistReason || ''}">
+        <input type="text" id="blacklist-reason" value="">
       </div>
   </div>
   `;
@@ -138,5 +136,5 @@ async function injectBlacklistReason(fortniteCharacterId) {
   const blacklistFetch = await fetch(`/api/blacklist/${fortniteCharacterId}`).then((res) => res.json());
   const blacklistReason = blacklistFetch.reason;
   const blacklistReasonInput = document.getElementById("blacklist-reason");
-  blacklistReasonInput.value = blacklistReason;
+  blacklistReasonInput.value = blacklistReason ? blacklistReason : "";
 }

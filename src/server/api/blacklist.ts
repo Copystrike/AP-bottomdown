@@ -19,13 +19,15 @@ router.get("/:id", async (req: Request, res: Response) => {
 
     const { error, data } = await getBlacklistsByUserId(profile?._id);
 
+    console.log(data);
+
     if (error || !data) {
         return res.json({ message: "Internal server error" });
     }
 
     const result = data.find((item) => item.fortnite_id === id);
 
-    res.json(result);
+    res.json({ ...result });
 });
 
 
